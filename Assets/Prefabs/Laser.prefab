@@ -148,6 +148,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6905284942334099319}
   - component: {fileID: 5947231275191037608}
+  - component: {fileID: -5354138461397598155}
   m_Layer: 0
   m_Name: Laser
   m_TagString: Untagged
@@ -186,6 +187,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScrollLeft
   scrollSpeed: 10
+--- !u!114 &-5354138461397598155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2707467229676712003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dee2e31e14d1ccb46b470832e405daf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Laser
 --- !u!1 &4314291481040201547
 GameObject:
   m_ObjectHideFlags: 0

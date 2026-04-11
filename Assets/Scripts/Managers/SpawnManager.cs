@@ -4,7 +4,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private GameObject laserPrefab;
-    [SerializeField] private float spawnInterval = 3.0f;
+    [SerializeField] private float spawnInterval = 2.0f;
 
 
     private float maxSpawnY = 1.75f;
@@ -29,12 +29,13 @@ public class SpawnManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(spawnInterval);
-            Instantiate(
-                laserPrefab,
+            ObjectPooler.Instance.SpawnFromPool(
+                "laser",
                 new Vector3(
                     spawnX,
-                    Random.Range(minSpawnY, maxSpawnY)),
-                    Quaternion.Euler(0, 0, Random.Range(0, 360))
+                    Random.Range(minSpawnY, maxSpawnY)
+                ),
+                Quaternion.Euler(0, 0, Random.Range(0, 360))
             );
             yield return new WaitForSeconds(spawnInterval);
         }
