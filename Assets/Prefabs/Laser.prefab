@@ -155,7 +155,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6905284942334099319
 Transform:
   m_ObjectHideFlags: 0
@@ -199,6 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dee2e31e14d1ccb46b470832e405daf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Laser
+  leftBoundary: -15
 --- !u!1 &4314291481040201547
 GameObject:
   m_ObjectHideFlags: 0

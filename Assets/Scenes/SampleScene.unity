@@ -956,6 +956,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Laser
       objectReference: {fileID: 0}
+    - target: {fileID: 2707467229676712003, guid: ba69cab42e68fff4db099d0f8e731f3b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6905284942334099319, guid: ba69cab42e68fff4db099d0f8e731f3b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
