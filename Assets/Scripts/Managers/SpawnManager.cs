@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
@@ -15,7 +16,7 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(SpawnLaserCoroutine());
+        StartCoroutine(SpawnCoroutine());
     }
 
     // Update is called once per frame
@@ -24,13 +25,13 @@ public class SpawnManager : MonoBehaviour
 
     }
 
-    IEnumerator SpawnLaserCoroutine()
+    IEnumerator SpawnCoroutine()
     {
         while (true)
         {
             yield return new WaitForSeconds(spawnInterval);
             ObjectPooler.Instance.SpawnFromPool(
-                "laser",
+                RandomObjectTagToSpawn(),
                 new Vector3(
                     spawnX,
                     Random.Range(minSpawnY, maxSpawnY)
@@ -39,5 +40,12 @@ public class SpawnManager : MonoBehaviour
             );
             yield return new WaitForSeconds(spawnInterval);
         }
+    }
+
+    private string RandomObjectTagToSpawn()
+    {
+        List<ObjectPooler.PoolDetails> poolsDetailsList = ObjectPooler.Instance.poolsDetailsList;
+        string objToSpawn = poolsDetailsList[Random.Range(0, poolsDetailsList.Count)].tag;
+        return objToSpawn;
     }
 }
