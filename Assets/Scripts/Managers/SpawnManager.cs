@@ -44,8 +44,15 @@ public class SpawnManager : MonoBehaviour
 
     private string RandomObjectTagToSpawn()
     {
-        List<ObjectPooler.PoolDetails> poolsDetailsList = ObjectPooler.Instance.poolsDetailsList;
-        string objToSpawn = poolsDetailsList[Random.Range(0, poolsDetailsList.Count)].tag;
-        return objToSpawn;
+        ObjectPooler pooler = ObjectPooler.Instance;
+
+        if (pooler == null || pooler.poolsDetailsList == null || pooler.poolsDetailsList.Count == 0)
+        {
+            Debug.LogWarning("No Pools Configured for Spawning");
+            return null;
+        }
+
+        string objTagToSpawn = pooler.poolsDetailsList[Random.Range(0, pooler.poolsDetailsList.Count)].tag;
+        return objTagToSpawn;
     }
 }
