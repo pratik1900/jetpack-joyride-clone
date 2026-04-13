@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
@@ -15,7 +16,7 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(SpawnLaserCoroutine());
+        StartCoroutine(SpawnCoroutine());
     }
 
     // Update is called once per frame
@@ -24,13 +25,21 @@ public class SpawnManager : MonoBehaviour
 
     }
 
-    IEnumerator SpawnLaserCoroutine()
+    IEnumerator SpawnCoroutine()
     {
         while (true)
         {
             yield return new WaitForSeconds(spawnInterval);
+            string objTagToSpawn = RandomObjectTagToSpawn();
+
+            if (objTagToSpawn == null)
+            {
+                Debug.LogWarning("No Object Tag found for spawning");
+                yield break;
+            }
+
             ObjectPooler.Instance.SpawnFromPool(
-                "laser",
+                objTagToSpawn,
                 new Vector3(
                     spawnX,
                     Random.Range(minSpawnY, maxSpawnY)
@@ -39,5 +48,19 @@ public class SpawnManager : MonoBehaviour
             );
             yield return new WaitForSeconds(spawnInterval);
         }
+    }
+
+    private string RandomObjectTagToSpawn()
+    {
+        ObjectPooler pooler = ObjectPooler.Instance;
+
+        if (pooler == null || pooler.poolsDetailsList == null || pooler.poolsDetailsList.Count == 0)
+        {
+            Debug.LogWarning("No Pools Configured for Spawning");
+            return null;
+        }
+
+        string objTagToSpawn = pooler.poolsDetailsList[Random.Range(0, pooler.poolsDetailsList.Count)].tag;
+        return objTagToSpawn;
     }
 }
