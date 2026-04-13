@@ -30,8 +30,16 @@ public class SpawnManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(spawnInterval);
+            string objTagToSpawn = RandomObjectTagToSpawn();
+
+            if (objTagToSpawn == null)
+            {
+                Debug.LogWarning("No Object Tag found for spawning");
+                yield break;
+            }
+
             ObjectPooler.Instance.SpawnFromPool(
-                RandomObjectTagToSpawn(),
+                objTagToSpawn,
                 new Vector3(
                     spawnX,
                     Random.Range(minSpawnY, maxSpawnY)
