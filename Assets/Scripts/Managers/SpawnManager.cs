@@ -20,7 +20,7 @@ public class SpawnManager : MonoBehaviour
         _handlers = new Dictionary<string, SpawnHandler>();
         foreach (SpawnHandler handler in GetComponentsInChildren<SpawnHandler>())
         {
-            _handlers[handler.ObjectTag] = handler;
+            _handlers[handler.ObjectTag.ToString()] = handler;
         }
         StartCoroutine(SpawnCoroutine());
     }
@@ -44,13 +44,12 @@ public class SpawnManager : MonoBehaviour
 
             string objTagToSpawn = RandomObjectTagToSpawn();
 
-            Debug.Log(objTagToSpawn);
             if (string.IsNullOrEmpty(objTagToSpawn) ||
                 !_handlers.TryGetValue(objTagToSpawn, out SpawnHandler handler)
             )
             {
                 Debug.LogWarning("No Object Tag found for spawning");
-                yield break;
+                continue;
             }
 
             handler.Spawn(spawnPos);
@@ -60,7 +59,6 @@ public class SpawnManager : MonoBehaviour
             //     spawnPos,
             //     Quaternion.Euler(0, 0, Random.Range(0, 360))
             // );
-            yield return new WaitForSeconds(spawnInterval);
         }
     }
 

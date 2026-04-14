@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class CoinSpawnHandler : SpawnHandler
 {
-    public override string ObjectTag => "Coin";
+    public override ObjectTags ObjectTag => ObjectTags.Coin;
     public override void Spawn(Vector3 position)
     {
         ObjectPooler.Instance.SpawnFromPool(
-            ObjectTag,
+            ObjectTag.ToString(),
             position,
             Quaternion.identity
         );

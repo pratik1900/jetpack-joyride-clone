@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class LaserSpawnHandler : SpawnHandler
 {
-    public override string ObjectTag => "Laser";
+    public override ObjectTags ObjectTag => ObjectTags.Laser;
     public override void Spawn(Vector3 position)
     {
         ObjectPooler.Instance.SpawnFromPool(
-            ObjectTag,
+            ObjectTag.ToString(),
             position,
-            Quaternion.Euler(0, 0, Random.Range(0, 360))
+            Quaternion.Euler(0, 0, Random.Range(0f, 360f))
         );
     }
 }
