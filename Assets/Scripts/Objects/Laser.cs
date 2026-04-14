@@ -21,6 +21,6 @@ public class Laser : MonoBehaviour, IPooledObject
 
     public void ReturnToPool()
     {
-        ObjectPooler.Instance.ReturnToPool("laser", gameObject);
+        ObjectPooler.Instance.ReturnToPool("Laser", gameObject);
     }
 }
