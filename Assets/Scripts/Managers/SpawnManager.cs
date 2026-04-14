@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] private GameObject laserPrefab;
     [SerializeField] private float spawnInterval = 2.0f;
 
 
@@ -12,10 +11,17 @@ public class SpawnManager : MonoBehaviour
     private float minSpawnY = -1.75f;
     private float spawnX = 15.0f;
 
+    private Dictionary<string, SpawnHandler> _handlers;
 
 
     void Start()
     {
+        // Build a lookup table from all handlers attached to child GameObjects
+        _handlers = new Dictionary<string, SpawnHandler>();
+        foreach (SpawnHandler handler in GetComponentsInChildren<SpawnHandler>())
+        {
+            _handlers[handler.ObjectTag.ToString()] = handler;
+        }
         StartCoroutine(SpawnCoroutine());
     }
 
@@ -30,23 +36,29 @@ public class SpawnManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(spawnInterval);
+
+            Vector3 spawnPos = new Vector3(
+                spawnX,
+                Random.Range(minSpawnY, maxSpawnY)
+            );
+
             string objTagToSpawn = RandomObjectTagToSpawn();
 
-            if (objTagToSpawn == null)
+            if (string.IsNullOrEmpty(objTagToSpawn) ||
+                !_handlers.TryGetValue(objTagToSpawn, out SpawnHandler handler)
+            )
             {
                 Debug.LogWarning("No Object Tag found for spawning");
-                yield break;
+                continue;
             }
 
-            ObjectPooler.Instance.SpawnFromPool(
-                objTagToSpawn,
-                new Vector3(
-                    spawnX,
-                    Random.Range(minSpawnY, maxSpawnY)
-                ),
-                Quaternion.Euler(0, 0, Random.Range(0, 360))
-            );
-            yield return new WaitForSeconds(spawnInterval);
+            handler.Spawn(spawnPos);
+
+            // ObjectPooler.Instance.SpawnFromPool(
+            //     objTagToSpawn,
+            //     spawnPos,
+            //     Quaternion.Euler(0, 0, Random.Range(0, 360))
+            // );
         }
     }
 
