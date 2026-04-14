@@ -42,7 +42,8 @@ public class CoinSpawnHandler : SpawnHandler
             {
                 Vector3 pos = new Vector3(
                     position.x + (col * pickedFormation.spacing),
-                    position.y + (row * pickedFormation.spacing)
+                    position.y + (row * pickedFormation.spacing),
+                    position.z
                 );
 
                 ObjectPooler.Instance.SpawnFromPool(
