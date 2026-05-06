@@ -36,13 +36,16 @@ public class CoinSpawnHandler : SpawnHandler
     {
         CoinGridFormation pickedFormation = PickCoinFormation();
 
+        float xCenterOffset = (pickedFormation.cols - 1) * pickedFormation.spacing * 0.5f;
+        float yCenterOffset = (pickedFormation.rows - 1) * pickedFormation.spacing * 0.5f;
+
         for (int row = 0; row < pickedFormation.rows; row++)
         {
             for (int col = 0; col < pickedFormation.cols; col++)
             {
                 Vector3 pos = new Vector3(
-                    position.x + (col * pickedFormation.spacing),
-                    position.y + (row * pickedFormation.spacing),
+                    position.x + (col * pickedFormation.spacing) - xCenterOffset,
+                    position.y + (row * pickedFormation.spacing) - yCenterOffset,
                     position.z
                 );
 
