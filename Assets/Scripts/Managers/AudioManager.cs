@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("--- Audio Clips ---")]
     [SerializeField] public AudioClip coinSFX;
+    [SerializeField] public AudioClip playerHitSFX;
     // [SerializeField] AudioClip laserSFX;
     // [SerializeField] AudioClip deathSFX;
     // [SerializeField] AudioClip thrusterSFX;

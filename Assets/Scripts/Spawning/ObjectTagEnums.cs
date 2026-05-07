@@ -2,5 +2,6 @@
 public enum ObjectTags
 {
     Laser,
-    Coin
+    Coin,
+    Hazard
 }

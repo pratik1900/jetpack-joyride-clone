@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("Hazard"))
         {
             LifeManager.Instance.LoseLife();
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.playerHitSFX);
         }
     }
 }

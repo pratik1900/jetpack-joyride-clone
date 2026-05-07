@@ -16,15 +16,27 @@ public class LifeManager : MonoBehaviour
         Instance = this;
     }
 
-    public void AddLife() => lives++;
+    void Start()
+    {
+        // set up initial life display
+        GameEvents.TriggerLivesChanged(lives);
+    }
+
+    public void AddLife()
+    {
+        lives++;
+        GameEvents.TriggerLivesChanged(lives);
+    }
 
     public void LoseLife()
     {
         lives--;
+        GameEvents.TriggerLivesChanged(lives);
 
         if (lives <= 0)
         {
             // Trigger Game Over Event 
+            GameEvents.TriggerGameOver();
         }
     }
 }

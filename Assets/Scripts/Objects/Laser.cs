@@ -16,7 +16,7 @@ public class Laser : MonoBehaviour, IPooledObject
     public void OnObjectSpawn()
     {
         // Post-Spawn Logic
-        Debug.Log("Laser Spawned!");
+        // Debug.Log("Laser Spawned!");
     }
 
     public void ReturnToPool()
