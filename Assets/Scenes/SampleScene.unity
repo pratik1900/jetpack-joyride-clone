@@ -493,6 +493,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   thrustSpeed: 4
+  spriteRenderer: {fileID: 467345722}
+  flashCount: 6
+  flashDuration: 0.08
 --- !u!114 &467345727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -966,7 +969,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.768
+  m_Volume: 0.266
   m_Pitch: 1
   Loop: 0
   Mute: 0

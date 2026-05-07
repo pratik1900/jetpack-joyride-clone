@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,6 +15,12 @@ public class PlayerController : MonoBehaviour
     private float roofY = 4.2f;
     // Lower bound of the playable area
     private float groundY = -3.7f;
+
+    // For Player Flash after getting hit
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private int flashCount = 6;
+    [SerializeField] private float flashDuration = 0.08f;
+
 
     private InputAction thrustAction;
 
@@ -51,12 +58,29 @@ public class PlayerController : MonoBehaviour
         playerControls.Disable();
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Hazard"))
         {
             LifeManager.Instance.LoseLife();
             AudioManager.Instance.PlaySFX(AudioManager.Instance.playerHitSFX);
+            PlayerFlashAfterHit();
+        }
+    }
+
+    private void PlayerFlashAfterHit()
+    {
+        StartCoroutine(PlayerFlashRoutine());
+    }
+
+    private IEnumerator PlayerFlashRoutine()
+    {
+        for (int i = 0; i < flashCount; i++)
+        {
+            spriteRenderer.enabled = false;
+            yield return new WaitForSeconds(flashDuration);
+            spriteRenderer.enabled = true;
+            yield return new WaitForSeconds(flashDuration);
         }
     }
 }
