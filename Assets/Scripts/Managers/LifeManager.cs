@@ -22,6 +22,16 @@ public class LifeManager : MonoBehaviour
         GameEvents.TriggerLivesChanged(lives);
     }
 
+    void OnEnable()
+    {
+        GameEvents.OnPlayerHit += LoseLife;
+    }
+
+    void OnDisable()
+    {
+        GameEvents.OnPlayerHit -= LoseLife;
+    }
+
     public void AddLife()
     {
         lives++;

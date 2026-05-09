@@ -32,6 +32,16 @@ public class AudioManager : MonoBehaviour
         PlayMusic(backgroundMusic);
     }
 
+    void OnEnable()
+    {
+        GameEvents.OnPlayerHit += () => PlaySFX(playerHitSFX);
+    }
+
+    void OnDisable()
+    {
+        GameEvents.OnPlayerHit -= () => PlaySFX(playerHitSFX);
+    }
+
     public void PlaySFX(AudioClip clip)
     {
         SFXSource.PlayOneShot(clip);
