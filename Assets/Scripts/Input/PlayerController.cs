@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +10,17 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float thrustSpeed = 5f;
     // [SerializeField] private float fallSpeed = 8f;
+
+    // Upper bound of the playable area
+    private float roofY = 4.2f;
+    // Lower bound of the playable area
+    private float groundY = -3.7f;
+
+    // For Player Flash after getting hit
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private int flashCount = 6;
+    [SerializeField] private float flashDuration = 0.08f;
+
 
     private InputAction thrustAction;
 
@@ -26,6 +38,14 @@ public class PlayerController : MonoBehaviour
         {
             playerRb.AddForce(Vector2.up * thrustSpeed, ForceMode2D.Force);
         }
+
+        // Clamp vertical position to playable area bounds
+        float clampedY = Mathf.Clamp(transform.position.y, groundY, roofY);
+        transform.position = new Vector3(transform.position.x, clampedY, transform.position.z);
+
+        // Kill upward velocity if at roof
+        if (transform.position.y >= roofY && playerRb.linearVelocity.y > 0)
+            playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, 0);
     }
 
     private void OnEnable()
@@ -38,11 +58,28 @@ public class PlayerController : MonoBehaviour
         playerControls.Disable();
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Laser"))
+        if (collision.CompareTag("Hazard"))
         {
-            Destroy(gameObject);
+            GameEvents.TriggerPlayerHit();
+            PlayerFlashAfterHit();
+        }
+    }
+
+    private void PlayerFlashAfterHit()
+    {
+        StartCoroutine(PlayerFlashRoutine());
+    }
+
+    private IEnumerator PlayerFlashRoutine()
+    {
+        for (int i = 0; i < flashCount; i++)
+        {
+            spriteRenderer.enabled = false;
+            yield return new WaitForSeconds(flashDuration);
+            spriteRenderer.enabled = true;
+            yield return new WaitForSeconds(flashDuration);
         }
     }
 }

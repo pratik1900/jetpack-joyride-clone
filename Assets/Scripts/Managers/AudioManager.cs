@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("--- Audio Clips ---")]
     [SerializeField] public AudioClip coinSFX;
+    [SerializeField] public AudioClip playerHitSFX;
     // [SerializeField] AudioClip laserSFX;
     // [SerializeField] AudioClip deathSFX;
     // [SerializeField] AudioClip thrusterSFX;
@@ -29,6 +30,16 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         PlayMusic(backgroundMusic);
+    }
+
+    void OnEnable()
+    {
+        GameEvents.OnPlayerHit += () => PlaySFX(playerHitSFX);
+    }
+
+    void OnDisable()
+    {
+        GameEvents.OnPlayerHit -= () => PlaySFX(playerHitSFX);
     }
 
     public void PlaySFX(AudioClip clip)
