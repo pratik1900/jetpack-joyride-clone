@@ -35,11 +35,13 @@ public class AudioManager : MonoBehaviour
     void OnEnable()
     {
         GameEvents.OnPlayerHit += () => PlaySFX(playerHitSFX);
+        GameEvents.OnShieldToggled += (isShieldEnbled) => PlayShieldSFX(isShieldEnbled);
     }
 
     void OnDisable()
     {
         GameEvents.OnPlayerHit -= () => PlaySFX(playerHitSFX);
+        GameEvents.OnShieldToggled -= (isShieldEnbled) => PlayShieldSFX(isShieldEnbled);
     }
 
     public void PlaySFX(AudioClip clip)
@@ -57,5 +59,17 @@ public class AudioManager : MonoBehaviour
     public void StopMusic()
     {
         musicSource.Stop();
+    }
+
+    public void PlayShieldSFX(bool isShieldEnabled)
+    {
+        if (isShieldEnabled)
+        {
+            // play shield enabled sfx
+        }
+        else
+        {
+            // play shield disabled sfx
+        }
     }
 }

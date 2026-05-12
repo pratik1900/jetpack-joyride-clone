@@ -5,6 +5,7 @@ public class LifeManager : MonoBehaviour
     public static LifeManager Instance;
 
     private int lives = 3;
+    private bool isShielded = false;
 
     void Awake()
     {
@@ -24,12 +25,14 @@ public class LifeManager : MonoBehaviour
 
     void OnEnable()
     {
-        GameEvents.OnPlayerHit += LoseLife;
+        GameEvents.OnPlayerHit += ProcessPlayerHit;
+        GameEvents.OnShieldToggled += ToggleShield;
     }
 
     void OnDisable()
     {
-        GameEvents.OnPlayerHit -= LoseLife;
+        GameEvents.OnPlayerHit -= ProcessPlayerHit;
+        GameEvents.OnShieldToggled -= ToggleShield;
     }
 
     public void AddLife()
@@ -48,5 +51,23 @@ public class LifeManager : MonoBehaviour
             // Trigger Game Over Event 
             GameEvents.TriggerGameOver();
         }
+    }
+
+    public void ProcessPlayerHit()
+    {
+        if (isShielded)
+        {
+            GameEvents.TriggerShieldToggled(false);
+        }
+        else
+        {
+            LoseLife();
+        }
+    }
+
+    public void ToggleShield(bool isShieldEnabled)
+    {
+        isShielded = isShieldEnabled;
+        Debug.Log("Shield: " + isShielded);
     }
 }
