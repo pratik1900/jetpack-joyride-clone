@@ -1,30 +1,11 @@
 using UnityEngine;
 
-public class ShieldPowerup : MonoBehaviour, IPowerUp
+public class ShieldPowerUp : IPowerUp
 {
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Destroy(gameObject);
-            Activate();
-        }
-    }
+    public PowerUpType Type => PowerUpType.Shield;
+    public float Duration => 5f;
 
-    private float duration = 5.0f;
-
-    public float Duration
-    {
-        get { return duration; }
-    }
-
-    public void Activate()
-    {
-        GameEvents.TriggerShieldToggled(true);
-    }
-
-    public void Deactivate()
-    {
-        GameEvents.TriggerShieldToggled(false);
-    }
+    public void Activate() => GameEvents.TriggerShieldActivated();
+    public void Deactivate() => GameEvents.TriggerShieldDeactivated();
+    public void ForceDeactivate() => GameEvents.TriggerShieldDeactivated();
 }

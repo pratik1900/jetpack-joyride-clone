@@ -15,6 +15,7 @@ public class LifeManager : MonoBehaviour
             return;
         }
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
@@ -26,13 +27,13 @@ public class LifeManager : MonoBehaviour
     void OnEnable()
     {
         GameEvents.OnPlayerHit += ProcessPlayerHit;
-        GameEvents.OnShieldToggled += ToggleShield;
+        GameEvents.OnShieldActivated += ShieldFlagEnable;
     }
 
     void OnDisable()
     {
         GameEvents.OnPlayerHit -= ProcessPlayerHit;
-        GameEvents.OnShieldToggled -= ToggleShield;
+        GameEvents.OnShieldActivated -= ShieldFlagEnable;
     }
 
     public void AddLife()
@@ -57,7 +58,8 @@ public class LifeManager : MonoBehaviour
     {
         if (isShielded)
         {
-            GameEvents.TriggerShieldToggled(false);
+            ShieldFlagDisable();
+            PowerUpManager.Instance.ForceDeactivatePowerUp(PowerUpType.Shield);
         }
         else
         {
@@ -65,9 +67,12 @@ public class LifeManager : MonoBehaviour
         }
     }
 
-    public void ToggleShield(bool isShieldEnabled)
+    public void ShieldFlagEnable()
     {
-        isShielded = isShieldEnabled;
-        Debug.Log("Shield: " + isShielded);
+        isShielded = true;
+    }
+    public void ShieldFlagDisable()
+    {
+        isShielded = false;
     }
 }

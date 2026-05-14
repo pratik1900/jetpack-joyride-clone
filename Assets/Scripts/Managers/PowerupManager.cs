@@ -1,28 +1,67 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerupManager : MonoBehaviour
+public class PowerUpManager : MonoBehaviour
 {
-    private void ActivatePowerup(IPowerUp powerUp)
+    public static PowerUpManager Instance;
+
+    //Tracks references to coroutines of active powerups (of each type) 
+    private Dictionary<PowerUpType, Coroutine> _activeCoroutines = new();
+    //Tracks references to instances of active powerups (of each type) 
+    private Dictionary<PowerUpType, IPowerUp> _activePowerUps = new();
+
+    void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public void ActivatePowerUp(IPowerUp powerUp)
+    {
+        PowerUpType type = powerUp.Type;
+
+        //Stop existing powerup of same type
+        ForceDeactivatePowerUp(type);
+
         powerUp.Activate();
 
-        StartCoroutine(
-            DeactivateAfterDurationRoutine(
-                powerUp.Duration,
+        // Store References
+        _activePowerUps[type] = powerUp;
+        _activeCoroutines[type] = StartCoroutine(
+            DeactivateAfterExpiryRoutine(
                 powerUp
             )
         );
     }
 
-    private IEnumerator DeactivateAfterDurationRoutine(float duration, IPowerUp powerUp)
+    // Normal Deactivation after expiry
+    private IEnumerator DeactivateAfterExpiryRoutine(IPowerUp powerUp)
     {
-        yield return new WaitForSeconds(duration);
-        DeactivatePowerup(powerUp);
+        yield return new WaitForSeconds(powerUp.Duration);
+        powerUp.Deactivate();
+        _activeCoroutines.Remove(powerUp.Type);
+        _activePowerUps.Remove(powerUp.Type);
     }
 
-    private void DeactivatePowerup(IPowerUp powerUp)
+    // Forced Deactivation of Coroutines before they expire (e.g. removal of shield after getting hit)
+    public void ForceDeactivatePowerUp(PowerUpType type)
     {
-        powerUp.Deactivate();
+        if (_activePowerUps.TryGetValue(type, out IPowerUp powerUp))
+        {
+            if (_activeCoroutines.TryGetValue(type, out Coroutine coroutine))
+            {
+                StopCoroutine(coroutine);
+                _activeCoroutines.Remove(type);
+            }
+            // powerUp.ForceDeactivate();
+            powerUp.Deactivate();
+            _activePowerUps.Remove(type);
+        }
     }
 }

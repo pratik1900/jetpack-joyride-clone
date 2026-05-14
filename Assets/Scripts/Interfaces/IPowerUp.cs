@@ -1,7 +1,8 @@
 public interface IPowerUp
 {
-    public void Activate();
-    public void Deactivate();
+    PowerUpType Type { get; }
+    void Activate();
+    void Deactivate();
     float Duration { get; }
 }
 
