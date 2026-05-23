@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PowerupPickupSpawnHandler : SpawnHandler
 {
-    [SerializeField] private PowerupSO[] availablePowerupEffects;
+    [SerializeField] private PowerupEffect[] availablePowerupEffects;
 
     public override ObjectTags ObjectTag => ObjectTags.PowerupPickup;
 
@@ -17,12 +17,12 @@ public class PowerupPickupSpawnHandler : SpawnHandler
 
         PowerupPickup pickup = spawnedPickupObject?.GetComponent<PowerupPickup>();
 
-        PowerupSO chosenPowerup = GetRandomPowerupEffect();
+        PowerupEffect chosenPowerup = GetRandomPowerupEffect();
 
         pickup.Initialize(chosenPowerup);
     }
 
-    private PowerupSO GetRandomPowerupEffect()
+    private PowerupEffect GetRandomPowerupEffect()
     {
         return availablePowerupEffects[Random.Range(0, availablePowerupEffects.Length)];
     }

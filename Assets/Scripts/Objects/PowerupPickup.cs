@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class PowerupPickup : MonoBehaviour, IPooledObject
 {
-    private PowerupSO powerupEffect;
+    private PowerupEffect powerupEffect;
 
-    public void Initialize(PowerupSO effect)
+    public void Initialize(PowerupEffect effect)
     {
         powerupEffect = effect;
     }
