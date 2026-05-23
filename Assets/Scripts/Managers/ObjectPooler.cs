@@ -77,8 +77,6 @@ public class ObjectPooler : MonoBehaviour
         Debug.Log(objToSpawn.GetComponent<IPooledObject>());
         objToSpawn.GetComponent<IPooledObject>()?.OnObjectSpawn();
 
-        // poolDictionary[tag].Enqueue(objToSpawn);  // This was there in the tutorial, but i separated it out in a different function (ReturnToPool)
-
         return objToSpawn;
     }
 

@@ -288,6 +288,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &234002303
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 234002304}
+  - component: {fileID: 234002305}
+  m_Layer: 0
+  m_Name: PowerupPickupSpawnHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &234002304
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234002303}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 248990766}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &234002305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234002303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed62b27645840b746aec89c8565c5dc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PowerupPickupSpawnHandler
+  availablePowerupEffects:
+  - {fileID: 11400000, guid: 02dee02fdc8fda24e83842ff7da7947d, type: 2}
 --- !u!1 &239033677
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,6 +516,7 @@ Transform:
   m_Children:
   - {fileID: 1016160507}
   - {fileID: 1153814199}
+  - {fileID: 234002304}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &344877319
@@ -976,6 +1023,9 @@ MonoBehaviour:
   - tag: Coin
     prefab: {fileID: 1773931007493890303, guid: 2c3b675f4bf422e4082d5d550eb9dd7f, type: 3}
     size: 30
+  - tag: PowerupPickup
+    prefab: {fileID: 2864674172105702133, guid: ce093f9151b75684aba329c8f862e588, type: 3}
+    size: 1
 --- !u!4 &579813726
 Transform:
   m_ObjectHideFlags: 0
@@ -1245,6 +1295,7 @@ MonoBehaviour:
   musicSource: {fileID: 970602077}
   coinSFX: {fileID: 8300000, guid: 5744411f79bcaa046ace627bcbcc7488, type: 3}
   playerHitSFX: {fileID: 8300000, guid: 6b6501bc3436c18418bd3901bc719f70, type: 3}
+  playerLifeGainSFX: {fileID: 8300000, guid: 551cc06079b9e8a4b83c490f6019fd58, type: 3}
   backgroundMusic: {fileID: 8300000, guid: 51a4f1157b7ff1449b5e5cf064d584c7, type: 3}
 --- !u!4 &728153363
 Transform:

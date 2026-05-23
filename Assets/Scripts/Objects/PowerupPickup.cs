@@ -1,15 +1,41 @@
 using UnityEngine;
 
-public class PowerupPickup : MonoBehaviour
+public class PowerupPickup : MonoBehaviour, IPooledObject
 {
-    [SerializeField] private PowerupSO powerupEffect;
+    private PowerupSO powerupEffect;
+
+    public void Initialize(PowerupSO effect)
+    {
+        powerupEffect = effect;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (!collision.gameObject.CompareTag("Player"))
         {
-            Destroy(gameObject);
-            powerupEffect.Apply(collision.gameObject);
+            return;
         }
+
+        if (powerupEffect == null)
+        {
+            Debug.LogWarning("PowerupPickup triggered without an assigned powerup effect.");
+            ReturnToPool();
+            return;
+        }
+
+        powerupEffect.Apply(collision.gameObject);
+        ReturnToPool();
+    }
+
+    public void OnObjectSpawn() { }
+
+    public void ReturnToPool()
+    {
+        powerupEffect = null;
+
+        ObjectPooler.Instance.ReturnToPool(
+            ObjectTags.PowerupPickup.ToString(),
+            gameObject
+        );
     }
 }

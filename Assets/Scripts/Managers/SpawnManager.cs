@@ -53,12 +53,6 @@ public class SpawnManager : MonoBehaviour
             }
 
             handler.Spawn(spawnPos);
-
-            // ObjectPooler.Instance.SpawnFromPool(
-            //     objTagToSpawn,
-            //     spawnPos,
-            //     Quaternion.Euler(0, 0, Random.Range(0, 360))
-            // );
         }
     }
 

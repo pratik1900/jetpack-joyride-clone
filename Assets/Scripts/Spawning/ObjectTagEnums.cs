@@ -3,5 +3,6 @@ public enum ObjectTags
 {
     Laser,
     Coin,
-    Hazard
+    Hazard,
+    PowerupPickup
 }

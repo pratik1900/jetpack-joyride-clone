@@ -5,6 +5,6 @@ public class BonusLifePowerup : PowerupSO
 {
     public override void Apply(GameObject target)
     {
-        LifeManager.Instance.AddLife();
+        GameEvents.TriggerPlayerLifeGain();
     }
 }
