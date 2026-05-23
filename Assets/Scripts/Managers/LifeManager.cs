@@ -5,7 +5,6 @@ public class LifeManager : MonoBehaviour
     public static LifeManager Instance;
 
     private int lives = 3;
-    private bool isShielded = false;
 
     void Awake()
     {
@@ -27,13 +26,11 @@ public class LifeManager : MonoBehaviour
     void OnEnable()
     {
         GameEvents.OnPlayerHit += ProcessPlayerHit;
-        GameEvents.OnShieldActivated += ShieldFlagEnable;
     }
 
     void OnDisable()
     {
         GameEvents.OnPlayerHit -= ProcessPlayerHit;
-        GameEvents.OnShieldActivated -= ShieldFlagEnable;
     }
 
     public void AddLife()
@@ -56,23 +53,6 @@ public class LifeManager : MonoBehaviour
 
     public void ProcessPlayerHit()
     {
-        if (isShielded)
-        {
-            ShieldFlagDisable();
-            PowerUpManager.Instance.ForceDeactivatePowerUp(PowerUpType.Shield);
-        }
-        else
-        {
-            LoseLife();
-        }
-    }
-
-    public void ShieldFlagEnable()
-    {
-        isShielded = true;
-    }
-    public void ShieldFlagDisable()
-    {
-        isShielded = false;
+        LoseLife();
     }
 }

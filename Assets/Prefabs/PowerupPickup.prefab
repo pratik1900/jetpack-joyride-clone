@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8564724743331129350}
   - component: {fileID: 6495621597027773236}
   m_Layer: 0
-  m_Name: ShieldPickUp
+  m_Name: PowerupPickup
   m_TagString: Shield
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

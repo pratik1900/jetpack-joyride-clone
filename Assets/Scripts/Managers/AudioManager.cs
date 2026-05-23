@@ -35,15 +35,11 @@ public class AudioManager : MonoBehaviour
     void OnEnable()
     {
         GameEvents.OnPlayerHit += () => PlaySFX(playerHitSFX);
-        GameEvents.OnShieldActivated += PlayShieldEnabledSFX;
-        GameEvents.OnShieldDeactivated += PlayShieldDisabledSFX;
     }
 
     void OnDisable()
     {
         GameEvents.OnPlayerHit -= () => PlaySFX(playerHitSFX);
-        GameEvents.OnShieldActivated -= PlayShieldEnabledSFX;
-        GameEvents.OnShieldDeactivated -= PlayShieldDisabledSFX;
     }
 
     public void PlaySFX(AudioClip clip)
@@ -61,15 +57,5 @@ public class AudioManager : MonoBehaviour
     public void StopMusic()
     {
         musicSource.Stop();
-    }
-
-    public void PlayShieldEnabledSFX()
-    {
-        // logic
-    }
-
-    public void PlayShieldDisabledSFX()
-    {
-        // logic
     }
 }
