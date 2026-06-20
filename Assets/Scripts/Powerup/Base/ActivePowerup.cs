@@ -20,15 +20,15 @@ public class ActivePowerup : MonoBehaviour
         StartCoroutine(ExpiryTimer(duration));
     }
 
-    public void SetTrigger(IExpiryTrigger expiryTrigger)
-    {
-        _expiryTrigger = expiryTrigger;
-    }
-
     private IEnumerator ExpiryTimer(float duration)
     {
         yield return new WaitForSeconds(duration);
         Expire();
+    }
+
+    public void SetTrigger(IExpiryTrigger expiryTrigger)
+    {
+        _expiryTrigger = expiryTrigger;
     }
 
     // public so the definition can call it for in case of instant buff type

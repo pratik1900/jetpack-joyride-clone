@@ -1,25 +1,16 @@
-// using UnityEngine;
-
-// public abstract class PowerupEffect : ScriptableObject
-// {
-//     public abstract void Apply(GameObject target);
-// }
-
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Powerup/Powerup Definition Data Asset")]
 public sealed class PowerupDefinition : ScriptableObject
 {
     // References
-    [SerializeField] private float? timer;
+    [SerializeField] private float timer;
     [SerializeReference] private IExpiryTrigger? expiryTrigger;
     [SerializeReference] private IEffect effect;
 
     [SerializeField] private Sprite icon;
 
     // Properties (for access)
-    public float? Timer => timer;
-    public IExpiryTrigger? ExpiryTrigger => expiryTrigger;
     public IEffect Effect => effect;
 
     public void Init(ActivePowerup powerup)
@@ -27,15 +18,15 @@ public sealed class PowerupDefinition : ScriptableObject
         effect.Apply();
 
         // For Instant Buffs
-        if (!timer.HasValue && expiryTrigger == null)
+        if (timer <= 0 && expiryTrigger == null)
         {
             powerup.Expire();
             return;
         }
 
         // Setup Expiry Timer
-        if (timer.HasValue)
-            powerup.StartExpiryTimer(timer.Value);
+        if (timer > 0)
+            powerup.StartExpiryTimer(timer);
 
         // Setup expiry condition (listenners)
         if (expiryTrigger != null)
