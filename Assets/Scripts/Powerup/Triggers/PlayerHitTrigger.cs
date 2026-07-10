@@ -1,5 +1,6 @@
 using System;
 
+[System.Serializable]
 public class PlayerHitTrigger : IExpiryTrigger
 {
     public event Action OnPowerupExpired;

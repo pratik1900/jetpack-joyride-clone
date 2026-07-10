@@ -1,41 +1,41 @@
-// using UnityEngine;
+using UnityEngine;
 
-// public class PowerupPickup : MonoBehaviour, IPooledObject
-// {
-//     private PowerupEffect powerupEffect;
+public class PowerupPickup : MonoBehaviour
+{
+    [SerializeField] private Powerup powerupPrefab;
 
-//     public void Initialize(PowerupEffect effect)
-//     {
-//         powerupEffect = effect;
-//     }
+    public void Initialize(Powerup powerup)
+    {
+        powerupPrefab = powerup;
+    }
 
-//     private void OnTriggerEnter2D(Collider2D collision)
-//     {
-//         if (!collision.gameObject.CompareTag("Player"))
-//         {
-//             return;
-//         }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.gameObject.CompareTag("Player"))
+        {
+            return;
+        }
 
-//         if (powerupEffect == null)
-//         {
-//             Debug.LogWarning("PowerupPickup triggered without an assigned powerup effect.");
-//             ReturnToPool();
-//             return;
-//         }
+        if (powerupPrefab == null)
+        {
+            Debug.LogWarning("PowerupPickup triggered without an assigned powerup.");
+            ReturnToPool();
+            return;
+        }
 
-//         powerupEffect.Apply(collision.gameObject);
-//         ReturnToPool();
-//     }
+        powerupPrefab.Activate();
+        ReturnToPool();
+    }
 
-//     public void OnObjectSpawn() { }
+    public void OnObjectSpawn() { }
 
-//     public void ReturnToPool()
-//     {
-//         powerupEffect = null;
+    public void ReturnToPool()
+    {
+        powerupPrefab = null;
 
-//         ObjectPooler.Instance.ReturnToPool(
-//             ObjectTags.PowerupPickup.ToString(),
-//             gameObject
-//         );
-//     }
-// }
+        ObjectPooler.Instance.ReturnToPool(
+            ObjectTags.PowerupPickup.ToString(),
+            gameObject
+        );
+    }
+}

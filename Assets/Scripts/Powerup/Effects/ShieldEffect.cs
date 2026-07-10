@@ -1,5 +1,6 @@
 using System;
 
+[System.Serializable]
 public class ShieldEffect : IEffect
 {
     public event Action OnShieldEnabled;
