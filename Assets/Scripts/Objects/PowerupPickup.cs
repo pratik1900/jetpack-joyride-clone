@@ -1,13 +1,15 @@
 using UnityEngine;
 
-public class PowerupPickup : MonoBehaviour
+public class PowerupPickup : MonoBehaviour, IPooledObject
 {
-    [SerializeField] private Powerup powerupPrefab;
+    [SerializeField] private Powerup[] availablePowerupPrefabs;
 
-    public void Initialize(Powerup powerup)
-    {
-        powerupPrefab = powerup;
-    }
+    private Powerup selectedPowerupPrefab;
+
+    // public void Initialize(Powerup powerup)
+    // {
+    //     selectedPowerupPrefab = powerup;
+    // }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -16,26 +18,44 @@ public class PowerupPickup : MonoBehaviour
             return;
         }
 
-        if (powerupPrefab == null)
+        if (selectedPowerupPrefab == null)
         {
-            Debug.LogWarning("PowerupPickup triggered without an assigned powerup.");
-            ReturnToPool();
-            return;
+            selectedPowerupPrefab = PickRandomPowerupPrefab();
         }
 
-        powerupPrefab.Activate();
+        Powerup activePowerup = Instantiate(
+            selectedPowerupPrefab,
+            collision.transform.position,
+            Quaternion.identity,
+            collision.transform
+        );
+
+        activePowerup.Activate();
         ReturnToPool();
     }
 
-    public void OnObjectSpawn() { }
+    public void OnObjectSpawn()
+    {
+        selectedPowerupPrefab = PickRandomPowerupPrefab();
+    }
 
     public void ReturnToPool()
     {
-        powerupPrefab = null;
+        selectedPowerupPrefab = null;
 
         ObjectPooler.Instance.ReturnToPool(
             ObjectTags.PowerupPickup.ToString(),
             gameObject
         );
+    }
+
+    private Powerup PickRandomPowerupPrefab()
+    {
+        if (availablePowerupPrefabs == null || availablePowerupPrefabs.Length == 0)
+        {
+            return null;
+        }
+
+        return availablePowerupPrefabs[Random.Range(0, availablePowerupPrefabs.Length)];
     }
 }

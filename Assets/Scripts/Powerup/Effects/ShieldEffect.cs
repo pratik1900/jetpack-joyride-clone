@@ -1,17 +1,33 @@
 using System;
 
-[System.Serializable]
-public class ShieldEffect : IEffect
+// [System.Serializable]
+// public class ShieldEffect : IEffect
+// {
+//     public event Action OnShieldEnabled;
+//     public event Action OnShieldDisabled;
+
+
+//     public void Apply()
+//     {
+//         OnShieldEnabled?.Invoke();
+//     }
+//     public void Remove()
+//     {
+//         OnShieldDisabled?.Invoke();
+//     }
+// }
+
+public class ShieldEffect : PowerupEffect
 {
     public event Action OnShieldEnabled;
     public event Action OnShieldDisabled;
 
 
-    public void Apply()
+    public override void Apply()
     {
         OnShieldEnabled?.Invoke();
     }
-    public void Remove()
+    public override void Remove()
     {
         OnShieldDisabled?.Invoke();
     }

@@ -1,5 +1,13 @@
-public interface IEffect
+using UnityEngine;
+
+// public interface IEffect
+// {
+//     public void Apply();
+//     public void Remove();
+// }
+
+public abstract class PowerupEffect : MonoBehaviour
 {
-    public void Apply();
-    public void Remove();
+    public abstract void Apply();
+    public abstract void Remove();
 }

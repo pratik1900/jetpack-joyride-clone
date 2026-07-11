@@ -155,3 +155,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8565a12746f5a474198ff1595b54f1a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShieldPickUp
+  availablePowerupPrefabs: []

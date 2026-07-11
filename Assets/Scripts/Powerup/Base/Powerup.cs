@@ -5,8 +5,8 @@ public class Powerup : MonoBehaviour
 {
     // References
     [SerializeField] private float timer;
-    [SerializeReference] private IExpiryTrigger? expiryTrigger;
-    [SerializeReference] private IEffect effect;
+    [SerializeField] private PowerupExpiryTrigger? expiryTrigger;
+    [SerializeField] private PowerupEffect effect;
 
     [SerializeField] private Sprite icon;
 
