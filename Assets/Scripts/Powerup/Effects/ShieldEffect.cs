@@ -1,17 +1,17 @@
 using System;
+using UnityEngine;
 
-// [System.Serializable]
-// public class ShieldEffect : IEffect
+// public class ShieldEffect : PowerupEffect
 // {
 //     public event Action OnShieldEnabled;
 //     public event Action OnShieldDisabled;
 
 
-//     public void Apply()
+//     public override void Apply()
 //     {
 //         OnShieldEnabled?.Invoke();
 //     }
-//     public void Remove()
+//     public override void Remove()
 //     {
 //         OnShieldDisabled?.Invoke();
 //     }
@@ -19,16 +19,28 @@ using System;
 
 public class ShieldEffect : PowerupEffect
 {
-    public event Action OnShieldEnabled;
-    public event Action OnShieldDisabled;
-
+    private PlayerPowerupController powerupController;
 
     public override void Apply()
     {
-        OnShieldEnabled?.Invoke();
+        powerupController = GetComponentInParent<PlayerPowerupController>();
+
+        if (powerupController == null)
+        {
+            Debug.LogWarning("ShieldEffect could not find PlayerPowerupController.");
+            return;
+        }
+
+        powerupController.Shield.EnableShield();
     }
+
     public override void Remove()
     {
-        OnShieldDisabled?.Invoke();
+        if (powerupController == null)
+        {
+            return;
+        }
+
+        powerupController.Shield.DisableShield();
     }
 }

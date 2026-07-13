@@ -2,14 +2,26 @@ using UnityEngine;
 
 public class PowerupPickup : MonoBehaviour, IPooledObject
 {
-    [SerializeField] private Powerup[] availablePowerupPrefabs;
+    [SerializeField]
+    private Powerup[] availablePowerupPrefabs;
 
     private Powerup selectedPowerupPrefab;
+
+    [SerializeField]
+    private float leftBoundary = -15.0f;
 
     // public void Initialize(Powerup powerup)
     // {
     //     selectedPowerupPrefab = powerup;
     // }
+
+    void Update()
+    {
+        if (gameObject.transform.position.x < leftBoundary)
+        {
+            ReturnToPool();
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -23,11 +35,24 @@ public class PowerupPickup : MonoBehaviour, IPooledObject
             selectedPowerupPrefab = PickRandomPowerupPrefab();
         }
 
+        PlayerPowerupController powerupController =
+            collision.GetComponentInChildren<PlayerPowerupController>();
+
+        if (powerupController == null)
+        {
+            Debug.LogWarning("Player has no PlayerPowerupController.");
+            ReturnToPool();
+            return;
+        }
+        Debug.Log("Check 3 - Parent Obj: " + powerupController.ActivePowerupRoot);
+
         Powerup activePowerup = Instantiate(
             selectedPowerupPrefab,
-            collision.transform.position,
+            // collision.transform.position,
+            powerupController.ActivePowerupRoot.position,
             Quaternion.identity,
-            collision.transform
+            // collision.transform
+            powerupController.ActivePowerupRoot
         );
 
         activePowerup.Activate();
@@ -36,17 +61,16 @@ public class PowerupPickup : MonoBehaviour, IPooledObject
 
     public void OnObjectSpawn()
     {
+        Debug.Log("Check 1 - Pickup selecting random powerup type");
         selectedPowerupPrefab = PickRandomPowerupPrefab();
+        Debug.Log("Check 2 - Powerup type: " + selectedPowerupPrefab.name);
     }
 
     public void ReturnToPool()
     {
         selectedPowerupPrefab = null;
 
-        ObjectPooler.Instance.ReturnToPool(
-            ObjectTags.PowerupPickup.ToString(),
-            gameObject
-        );
+        ObjectPooler.Instance.ReturnToPool(ObjectTags.PowerupPickup.ToString(), gameObject);
     }
 
     private Powerup PickRandomPowerupPrefab()

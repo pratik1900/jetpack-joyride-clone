@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerControls playerControls;
     private Rigidbody2D playerRb;
+    [SerializeField] private PlayerPowerupController powerupController;
 
     [Header("Movement")]
     [SerializeField] private float thrustSpeed = 5f;
@@ -30,6 +31,11 @@ public class PlayerController : MonoBehaviour
         playerRb = GetComponent<Rigidbody2D>();
 
         thrustAction = playerControls.Player.Thrust;
+
+        if (powerupController == null)
+        {
+            powerupController = GetComponentInChildren<PlayerPowerupController>();
+        }
     }
 
     void Update()
@@ -62,6 +68,14 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("Hazard"))
         {
+            if (
+                powerupController != null
+                && powerupController.Shield != null
+                && powerupController.Shield.TryBlockHit()
+            )
+            {
+                return;
+            }
             GameEvents.TriggerPlayerHit();
             PlayerFlashAfterHit();
         }
