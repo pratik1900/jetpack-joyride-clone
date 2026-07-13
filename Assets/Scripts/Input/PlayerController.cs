@@ -6,22 +6,31 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerControls playerControls;
     private Rigidbody2D playerRb;
-    [SerializeField] private PlayerPowerupController powerupController;
+
+    [SerializeField]
+    private PlayerPowerupController powerupController;
 
     [Header("Movement")]
-    [SerializeField] private float thrustSpeed = 5f;
+    [SerializeField]
+    private float thrustSpeed = 5f;
+
     // [SerializeField] private float fallSpeed = 8f;
 
     // Upper bound of the playable area
     private float roofY = 4.2f;
+
     // Lower bound of the playable area
     private float groundY = -3.7f;
 
     // For Player Flash after getting hit
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private int flashCount = 6;
-    [SerializeField] private float flashDuration = 0.08f;
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
 
+    [SerializeField]
+    private int flashCount = 6;
+
+    [SerializeField]
+    private float flashDuration = 0.08f;
 
     private InputAction thrustAction;
 

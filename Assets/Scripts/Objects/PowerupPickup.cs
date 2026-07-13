@@ -61,9 +61,7 @@ public class PowerupPickup : MonoBehaviour, IPooledObject
 
     public void OnObjectSpawn()
     {
-        Debug.Log("Check 1 - Pickup selecting random powerup type");
         selectedPowerupPrefab = PickRandomPowerupPrefab();
-        Debug.Log("Check 2 - Powerup type: " + selectedPowerupPrefab.name);
     }
 
     public void ReturnToPool()

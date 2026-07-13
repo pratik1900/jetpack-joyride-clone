@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class ScrollLeft : MonoBehaviour
 {
-    [SerializeField] private float scrollSpeed = 10.0f;
+    [SerializeField]
+    private float scrollSpeed = 10.0f;
 
     void Update()
     {

@@ -9,10 +9,7 @@ public class GameManager : MonoBehaviour
         // GameEvents.OnGameOver +=
     }
 
-    void OnDisable()
-    {
-
-    }
+    void OnDisable() { }
 
     // private void () {}
 }

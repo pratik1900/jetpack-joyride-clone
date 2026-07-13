@@ -53,7 +53,7 @@ public class LifeManager : MonoBehaviour
 
         if (lives_current <= 0)
         {
-            // Trigger Game Over Event 
+            // Trigger Game Over Event
             GameEvents.TriggerGameOver();
         }
     }

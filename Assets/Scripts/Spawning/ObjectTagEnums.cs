@@ -4,5 +4,5 @@ public enum ObjectTags
     Laser,
     Coin,
     Hazard,
-    PowerupPickup
+    PowerupPickup,
 }

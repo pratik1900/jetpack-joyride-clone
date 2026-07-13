@@ -4,11 +4,17 @@ using UnityEngine;
 public class Powerup : MonoBehaviour
 {
     // References
-    [SerializeField] private float timer;
-    [SerializeField] private PowerupExpiryTrigger? expiryTrigger;
-    [SerializeField] private PowerupEffect effect;
+    [SerializeField]
+    private float timer;
 
-    [SerializeField] private Sprite icon;
+    [SerializeField]
+    private PowerupExpiryTrigger? expiryTrigger;
+
+    [SerializeField]
+    private PowerupEffect effect;
+
+    [SerializeField]
+    private Sprite icon;
 
     // Properties (for access)
     // public IEffect Effect => effect;
@@ -28,7 +34,7 @@ public class Powerup : MonoBehaviour
             Expire();
             return;
         }
-        // For Timer-Based Buffs 
+        // For Timer-Based Buffs
         if (timer > 0)
             StartCoroutine(ExpiryTimer(timer));
 
@@ -36,7 +42,7 @@ public class Powerup : MonoBehaviour
         if (expiryTrigger != null)
         {
             expiryTrigger.Init();
-            expiryTrigger.OnPowerupExpired += Expire; // setup listener for destroying the powerup once expiry condition is met 
+            expiryTrigger.OnPowerupExpired += Expire; // setup listener for destroying the powerup once expiry condition is met
         }
     }
 
@@ -48,7 +54,8 @@ public class Powerup : MonoBehaviour
 
     private void Expire()
     {
-        if (_isExpired) return;
+        if (_isExpired)
+            return;
 
         _isExpired = true;
         // Undo the effects of the powerup

@@ -4,19 +4,28 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
-
     [Header("--- Audio Sources ---")]
-    [SerializeField] AudioSource SFXSource;
-    [SerializeField] AudioSource musicSource;
+    [SerializeField]
+    AudioSource SFXSource;
+
+    [SerializeField]
+    AudioSource musicSource;
 
     [Header("--- Audio Clips ---")]
-    [SerializeField] public AudioClip coinSFX;
-    [SerializeField] public AudioClip playerHitSFX;
-    [SerializeField] public AudioClip playerLifeGainSFX;
+    [SerializeField]
+    public AudioClip coinSFX;
+
+    [SerializeField]
+    public AudioClip playerHitSFX;
+
+    [SerializeField]
+    public AudioClip playerLifeGainSFX;
+
     // [SerializeField] AudioClip pSFX;
     // [SerializeField] AudioClip deathSFX;
     // [SerializeField] AudioClip thrusterSFX;
-    [SerializeField] public AudioClip backgroundMusic;
+    [SerializeField]
+    public AudioClip backgroundMusic;
 
     private void Awake()
     {

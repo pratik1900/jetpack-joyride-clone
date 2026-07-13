@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour, IPooledObject
 {
-    [SerializeField] private float leftBoundary = -15.0f;
-        
+    [SerializeField]
+    private float leftBoundary = -15.0f;
+
     void Start() { }
 
     void Update()
@@ -28,9 +29,6 @@ public class Coin : MonoBehaviour, IPooledObject
 
     public void ReturnToPool()
     {
-        ObjectPooler.Instance.ReturnToPool(
-            ObjectTags.Coin.ToString(),
-            gameObject
-        );
+        ObjectPooler.Instance.ReturnToPool(ObjectTags.Coin.ToString(), gameObject);
     }
 }

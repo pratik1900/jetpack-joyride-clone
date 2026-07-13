@@ -19,7 +19,7 @@ public class ObjectPooler : MonoBehaviour
 
     private Dictionary<string, Queue<GameObject>> poolDictionary;
 
-    // This class stores metadata that will be used to create the actual pools 
+    // This class stores metadata that will be used to create the actual pools
     [System.Serializable] //makes the class visible in the inspector
     public class PoolDetails
     {
@@ -35,7 +35,7 @@ public class ObjectPooler : MonoBehaviour
         // will store all pools as k-v pairs (string (pool name) keys, the pools as the values)
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
-        // Creates all the different pools (for storing different kinds on objects) 
+        // Creates all the different pools (for storing different kinds on objects)
         foreach (PoolDetails poolDetails in poolsDetailsList)
         {
             // Create the actual pool
@@ -72,8 +72,7 @@ public class ObjectPooler : MonoBehaviour
         objToSpawn.transform.rotation = rotation;
         objToSpawn.SetActive(true);
 
-
-        // Post-spawn logic (resetting values, etc.) 
+        // Post-spawn logic (resetting values, etc.)
         Debug.Log(objToSpawn.GetComponent<IPooledObject>());
         objToSpawn.GetComponent<IPooledObject>()?.OnObjectSpawn();
 
@@ -85,5 +84,4 @@ public class ObjectPooler : MonoBehaviour
         obj.SetActive(false);
         poolDictionary[tag].Enqueue(obj);
     }
-
 }

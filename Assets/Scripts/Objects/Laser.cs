@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour, IPooledObject
 {
-    [SerializeField] private float leftBoundary = -15.0f;
+    [SerializeField]
+    private float leftBoundary = -15.0f;
 
     private void Update()
     {
@@ -21,9 +22,6 @@ public class Laser : MonoBehaviour, IPooledObject
 
     public void ReturnToPool()
     {
-        ObjectPooler.Instance.ReturnToPool(
-            ObjectTags.Laser.ToString(),
-            gameObject
-        );
+        ObjectPooler.Instance.ReturnToPool(ObjectTags.Laser.ToString(), gameObject);
     }
 }

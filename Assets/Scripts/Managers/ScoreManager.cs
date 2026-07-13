@@ -1,5 +1,5 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -7,9 +7,11 @@ public class ScoreManager : MonoBehaviour
     public int score { get; private set; }
     public int highScore { get; private set; }
 
-    [SerializeField] private TMP_Text scoreTextValue;
-    [SerializeField] private TMP_Text highScoreTextValue;
+    [SerializeField]
+    private TMP_Text scoreTextValue;
 
+    [SerializeField]
+    private TMP_Text highScoreTextValue;
 
     private void Awake()
     {
