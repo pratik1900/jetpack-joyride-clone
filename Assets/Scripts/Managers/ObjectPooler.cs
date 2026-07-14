@@ -73,7 +73,6 @@ public class ObjectPooler : MonoBehaviour
         objToSpawn.SetActive(true);
 
         // Post-spawn logic (resetting values, etc.)
-        Debug.Log(objToSpawn.GetComponent<IPooledObject>());
         objToSpawn.GetComponent<IPooledObject>()?.OnObjectSpawn();
 
         return objToSpawn;

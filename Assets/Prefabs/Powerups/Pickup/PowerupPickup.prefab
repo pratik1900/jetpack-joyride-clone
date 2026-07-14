@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6495621597027773236}
   m_Layer: 0
   m_Name: PowerupPickup
-  m_TagString: Shield
+  m_TagString: PowerupPickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -157,3 +157,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShieldPickUp
   availablePowerupPrefabs:
   - {fileID: 5839474847603728759, guid: d89027bc3485d0d45a46a586804a4dd0, type: 3}
+  leftBoundary: -15
+  powerupController: {fileID: 0}

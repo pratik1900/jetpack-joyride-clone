@@ -10,10 +10,20 @@ public class PowerupPickup : MonoBehaviour, IPooledObject
     [SerializeField]
     private float leftBoundary = -15.0f;
 
+    [SerializeField]
+    private PlayerPowerupController powerupController;
+
     // public void Initialize(Powerup powerup)
     // {
     //     selectedPowerupPrefab = powerup;
     // }
+
+    void Awake()
+    {
+        powerupController = GameObject
+            .FindWithTag("PowerupController")
+            ?.GetComponent<PlayerPowerupController>();
+    }
 
     void Update()
     {
@@ -35,8 +45,8 @@ public class PowerupPickup : MonoBehaviour, IPooledObject
             selectedPowerupPrefab = PickRandomPowerupPrefab();
         }
 
-        PlayerPowerupController powerupController =
-            collision.GetComponentInChildren<PlayerPowerupController>();
+        // PlayerPowerupController powerupController =
+        //     collision.GetComponentInChildren<PlayerPowerupController>();
 
         if (powerupController == null)
         {
@@ -44,14 +54,20 @@ public class PowerupPickup : MonoBehaviour, IPooledObject
             ReturnToPool();
             return;
         }
-        Debug.Log("Check 3 - Parent Obj: " + powerupController.ActivePowerupRoot);
+
+        //Check if Powerup of the same type is already active, if so refresh the timer and return to pool
+        Transform overlappingPowerup = GetOverlappingPowerup();
+        if (overlappingPowerup != null)
+        {
+            overlappingPowerup.GetComponent<Powerup>().RefreshExpiryTimerIfPresent();
+            ReturnToPool();
+            return;
+        }
 
         Powerup activePowerup = Instantiate(
             selectedPowerupPrefab,
-            // collision.transform.position,
             powerupController.ActivePowerupRoot.position,
             Quaternion.identity,
-            // collision.transform
             powerupController.ActivePowerupRoot
         );
 
@@ -79,5 +95,19 @@ public class PowerupPickup : MonoBehaviour, IPooledObject
         }
 
         return availablePowerupPrefabs[Random.Range(0, availablePowerupPrefabs.Length)];
+    }
+
+    private Transform GetOverlappingPowerup()
+    {
+        foreach (Transform child in powerupController.ActivePowerupRoot)
+        {
+            string childName = child.name.Replace("(Clone)", "").Trim();
+            if (selectedPowerupPrefab.name == childName)
+            {
+                return child;
+            }
+        }
+
+        return null;
     }
 }

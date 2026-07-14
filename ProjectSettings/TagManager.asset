@@ -10,6 +10,8 @@ TagManager:
   - Coin
   - Hazard
   - Shield
+  - PowerupPickup
+  - PowerupController
   layers:
   - Default
   - TransparentFX

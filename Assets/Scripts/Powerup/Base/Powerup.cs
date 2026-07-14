@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
+#nullable enable
+
 public class Powerup : MonoBehaviour
 {
     // References
@@ -19,6 +21,7 @@ public class Powerup : MonoBehaviour
     // Properties (for access)
     // public IEffect Effect => effect;
     private bool _isExpired;
+    private IEnumerator? _expiryCoroutine;
 
     // Call this when the player picks up the powerup
     public void Activate()
@@ -36,7 +39,10 @@ public class Powerup : MonoBehaviour
         }
         // For Timer-Based Buffs
         if (timer > 0)
-            StartCoroutine(ExpiryTimer(timer));
+        {
+            _expiryCoroutine = ExpiryTimer(timer);
+            StartCoroutine(_expiryCoroutine);
+        }
 
         // For Condition-Based Buffs (listenners)
         if (expiryTrigger != null)
@@ -50,6 +56,16 @@ public class Powerup : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         Expire();
+    }
+
+    public void RefreshExpiryTimerIfPresent()
+    {
+        if (_expiryCoroutine != null)
+        {
+            StopCoroutine(_expiryCoroutine);
+        }
+        _expiryCoroutine = ExpiryTimer(timer);
+        StartCoroutine(_expiryCoroutine);
     }
 
     private void Expire()

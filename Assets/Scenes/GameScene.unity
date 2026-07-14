@@ -332,8 +332,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed62b27645840b746aec89c8565c5dc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PowerupPickupSpawnHandler
-  availablePowerupEffects:
-  - {fileID: 11400000, guid: 02dee02fdc8fda24e83842ff7da7947d, type: 2}
 --- !u!1 &239033677
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,6 +758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9033a1ae0a04d44478afc478299aa985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  powerupController: {fileID: 0}
   thrustSpeed: 4
   spriteRenderer: {fileID: 467345722}
   flashCount: 6
@@ -983,6 +982,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerupPickup
       objectReference: {fileID: 0}
+    - target: {fileID: 6495621597027773236, guid: ce093f9151b75684aba329c8f862e588, type: 3}
+      propertyPath: powerupController
+      value: 
+      objectReference: {fileID: 2046165372}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2748,7 +2751,7 @@ GameObject:
   - component: {fileID: 2046165373}
   m_Layer: 0
   m_Name: PowerupController
-  m_TagString: Untagged
+  m_TagString: PowerupController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2781,8 +2784,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad43c851969115b4aaccc5898f053549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerPowerupController
-  activePowerupRoot: {fileID: 0}
-  shield: {fileID: 0}
 --- !u!114 &2046165373
 MonoBehaviour:
   m_ObjectHideFlags: 0
