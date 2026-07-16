@@ -20,7 +20,7 @@ public class Powerup : MonoBehaviour
 
     // Properties (for access)
     // public IEffect Effect => effect;
-    private bool _isExpired;
+    private bool _isExpired = false;
     private IEnumerator? _expiryCoroutine;
 
     // Call this when the player picks up the powerup
@@ -68,7 +68,7 @@ public class Powerup : MonoBehaviour
         StartCoroutine(_expiryCoroutine);
     }
 
-    private void Expire()
+    public void Expire()
     {
         if (_isExpired)
             return;

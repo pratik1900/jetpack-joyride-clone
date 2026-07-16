@@ -23,7 +23,11 @@ public class PlayerShield : MonoBehaviour
             return false;
 
         OnShieldBlockedHit?.Invoke();
-        DisableShield();
+        // DisableShield();
+        GetComponentInChildren<Powerup>().Expire();
         return true;
     }
 }
+
+// TO DETERMINE: IS IsActive (and PlayerShield.cs - apart from TryBlockHit) even necessary? WHen shield blocks hit, we simply
+// expire the powerup,which destroys the instance anyway

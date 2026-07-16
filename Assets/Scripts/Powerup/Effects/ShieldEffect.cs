@@ -1,27 +1,14 @@
 using System;
 using UnityEngine;
 
-// public class ShieldEffect : PowerupEffect
-// {
-//     public event Action OnShieldEnabled;
-//     public event Action OnShieldDisabled;
-
-//     public override void Apply()
-//     {
-//         OnShieldEnabled?.Invoke();
-//     }
-//     public override void Remove()
-//     {
-//         OnShieldDisabled?.Invoke();
-//     }
-// }
-
 public class ShieldEffect : PowerupEffect
 {
     private PlayerPowerupController powerupController;
+    private PlayerController playerController;
 
     public override void Apply()
     {
+        playerController = GetComponentInParent<PlayerController>();
         powerupController = GetComponentInParent<PlayerPowerupController>();
 
         if (powerupController == null)
@@ -41,5 +28,14 @@ public class ShieldEffect : PowerupEffect
         }
 
         powerupController.Shield.DisableShield();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Hazard"))
+        {
+            Debug.Log("Check 2");
+            playerController.ProcessHazardHit(collision);
+        }
     }
 }

@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
 
     private InputAction thrustAction;
 
+    private bool isInvincible = false;
+
     void Awake()
     {
         playerControls = new PlayerControls();
@@ -77,17 +79,29 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("Hazard"))
         {
-            if (
-                powerupController != null
-                && powerupController.Shield != null
-                && powerupController.Shield.TryBlockHit()
-            )
-            {
-                return;
-            }
-            GameEvents.TriggerPlayerHit();
-            PlayerFlashAfterHit();
+            Debug.Log("Check 1");
+            ProcessHazardHit(collision);
         }
+    }
+
+    public void ProcessHazardHit(Collider2D collision)
+    {
+        if (
+            powerupController != null
+            && powerupController.Shield != null
+            && powerupController.Shield.TryBlockHit()
+        )
+        {
+            // collision.gameObject.GetComponent<Laser>().ReturnToPool();
+            StartCoroutine(StartIFrames(1.5f));
+            return;
+        }
+
+        // Checking IFrames
+        if (isInvincible)
+            return;
+        GameEvents.TriggerPlayerHit();
+        PlayerFlashAfterHit();
     }
 
     private void PlayerFlashAfterHit()
@@ -104,5 +118,14 @@ public class PlayerController : MonoBehaviour
             spriteRenderer.enabled = true;
             yield return new WaitForSeconds(flashDuration);
         }
+    }
+
+    private IEnumerator StartIFrames(float duration)
+    {
+        isInvincible = true;
+
+        yield return new WaitForSeconds(duration);
+
+        isInvincible = false;
     }
 }
