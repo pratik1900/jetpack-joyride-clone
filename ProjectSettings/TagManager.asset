@@ -12,6 +12,7 @@ TagManager:
   - Shield
   - PowerupPickup
   - PowerupController
+  - Magnet
   layers:
   - Default
   - TransparentFX

@@ -16,7 +16,7 @@ public class Powerup : MonoBehaviour
     private PowerupEffect effect;
 
     [SerializeField]
-    private Sprite icon;
+    public Sprite icon;
 
     // Properties (for access)
     // public IEffect Effect => effect;

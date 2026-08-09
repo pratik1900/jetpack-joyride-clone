@@ -8,9 +8,13 @@ public class PlayerPowerupController : MonoBehaviour
     // [SerializeField]
     private PlayerShield shield;
 
+    // [SerializeField]
+    private PlayerMagnet magnet;
+
     // Properties (for access)
     public Transform ActivePowerupRoot => activePowerupRoot != null ? activePowerupRoot : transform;
     public PlayerShield Shield => shield;
+    public PlayerMagnet Magnet => magnet;
 
     private void Awake()
     {
@@ -22,6 +26,11 @@ public class PlayerPowerupController : MonoBehaviour
         if (shield == null)
         {
             shield = GetComponent<PlayerShield>();
+        }
+
+        if (magnet == null)
+        {
+            magnet = GetComponent<PlayerMagnet>();
         }
     }
 }

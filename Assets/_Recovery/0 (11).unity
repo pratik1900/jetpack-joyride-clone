@@ -2688,7 +2688,6 @@ GameObject:
   - component: {fileID: 2046165371}
   - component: {fileID: 2046165372}
   - component: {fileID: 2046165373}
-  - component: {fileID: 2046165374}
   m_Layer: 10
   m_Name: PowerupController
   m_TagString: PowerupController
@@ -2736,18 +2735,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c63fe417d8d94a47aa0183c686a2017, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShield
---- !u!114 &2046165374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2046165370}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9de6608c4dafebb48a8fb5faf65f7309, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMagnet
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PowerupPickup : MonoBehaviour, IPooledObject
@@ -93,8 +94,29 @@ public class PowerupPickup : MonoBehaviour, IPooledObject
         {
             return null;
         }
+        Powerup selectedPowerup = availablePowerupPrefabs[
+            Random.Range(0, availablePowerupPrefabs.Length)
+        ];
+        Debug.Log($"Picked random powerup: {selectedPowerup.name}");
+        SetIconForPickup(selectedPowerup);
 
-        return availablePowerupPrefabs[Random.Range(0, availablePowerupPrefabs.Length)];
+        return selectedPowerup;
+    }
+
+    private void SetIconForPickup(Powerup powerup)
+    {
+        if (powerup == null)
+        {
+            return;
+        }
+
+        Sprite icon = powerup.GetComponent<Powerup>().icon;
+        SpriteRenderer iconRenderer = transform.Find("Icon").GetComponent<SpriteRenderer>();
+
+        if (iconRenderer != null && icon != null)
+        {
+            iconRenderer.sprite = icon;
+        }
     }
 
     private Transform GetOverlappingPowerup()
