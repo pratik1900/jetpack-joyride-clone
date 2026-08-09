@@ -101,6 +101,7 @@ public class PlayerController : MonoBehaviour
         if (isInvincible)
             return;
         GameEvents.TriggerPlayerHit();
+        StartCoroutine(StartIFrames(1.5f)); // to prevent multiple hits in a short time frame
         PlayerFlashAfterHit();
     }
 

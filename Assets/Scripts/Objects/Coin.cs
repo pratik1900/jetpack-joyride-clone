@@ -9,7 +9,8 @@ public class Coin : MonoBehaviour, IPooledObject
     private bool isMagnetized = false;
 
     [SerializeField]
-    private float currentSpeed = 20.0f; // Adjust the speed as needed
+    private float magnetBaseSpeed = 20.0f;
+    private float currentSpeed;
     private float acceleration = 15.0f; // Adjust the accelerations as needed
 
     void Start() { }
@@ -50,7 +51,12 @@ public class Coin : MonoBehaviour, IPooledObject
         }
     }
 
-    public void OnObjectSpawn() { }
+    public void OnObjectSpawn()
+    {
+        // Reset the coin's state when it is spawned from the pool
+        isMagnetized = false;
+        currentSpeed = magnetBaseSpeed;
+    }
 
     public void ReturnToPool()
     {

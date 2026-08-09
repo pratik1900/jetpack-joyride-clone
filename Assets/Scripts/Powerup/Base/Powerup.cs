@@ -60,10 +60,12 @@ public class Powerup : MonoBehaviour
 
     public void RefreshExpiryTimerIfPresent()
     {
-        if (_expiryCoroutine != null)
+        if (_expiryCoroutine == null || timer <= 0)
         {
-            StopCoroutine(_expiryCoroutine);
+            return;
         }
+
+        StopCoroutine(_expiryCoroutine);
         _expiryCoroutine = ExpiryTimer(timer);
         StartCoroutine(_expiryCoroutine);
     }

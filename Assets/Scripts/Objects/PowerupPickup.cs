@@ -44,6 +44,12 @@ public class PowerupPickup : MonoBehaviour, IPooledObject
         if (selectedPowerupPrefab == null)
         {
             selectedPowerupPrefab = PickRandomPowerupPrefab();
+            if (selectedPowerupPrefab == null)
+            {
+                Debug.LogWarning("Powerup pickup has no configured powerup prefab.");
+                ReturnToPool();
+                return;
+            }
         }
 
         // PlayerPowerupController powerupController =
