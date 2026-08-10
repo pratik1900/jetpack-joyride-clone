@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class PlayerPowerupController : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class PlayerPowerupController : MonoBehaviour
     public PlayerShield Shield => shield;
     public PlayerMagnet Magnet => magnet;
 
+    private readonly Dictionary<PowerupType, Powerup> activePowerups = new();
+
     private void Awake()
     {
         if (activePowerupRoot == null)
@@ -32,5 +35,33 @@ public class PlayerPowerupController : MonoBehaviour
         {
             magnet = GetComponent<PlayerMagnet>();
         }
+    }
+
+    public void RegisterActivePowerup(Powerup powerup)
+    {
+        if (powerup == null)
+        {
+            return;
+        }
+
+        activePowerups[powerup.Type] = powerup;
+    }
+
+    public void UnregisterActivePowerup(Powerup powerup)
+    {
+        if (powerup == null)
+        {
+            return;
+        }
+
+        if (activePowerups.TryGetValue(powerup.Type, out Powerup activePowerup) && activePowerup == powerup)
+        {
+            activePowerups.Remove(powerup.Type);
+        }
+    }
+
+    public bool TryGetActivePowerup(PowerupType type, out Powerup powerup)
+    {
+        return activePowerups.TryGetValue(type, out powerup);
     }
 }

@@ -17,6 +17,12 @@ public class MagnetEffect : PowerupEffect
             return;
         }
 
+        if (powerupController.Magnet == null)
+        {
+            Debug.LogWarning("MagnetEffect could not find PlayerMagnet.");
+            return;
+        }
+
         powerupController.Magnet.EnableMagnet();
     }
 

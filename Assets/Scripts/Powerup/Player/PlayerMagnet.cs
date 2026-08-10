@@ -6,6 +6,12 @@ public class PlayerMagnet : MonoBehaviour
     public event Action OnMagnetActivated;
 
     public bool IsActive { get; private set; }
+    private PlayerPowerupController powerupController;
+
+    private void Awake()
+    {
+        powerupController = GetComponent<PlayerPowerupController>();
+    }
 
     public void EnableMagnet()
     {
@@ -23,11 +29,18 @@ public class PlayerMagnet : MonoBehaviour
             return false;
 
         OnMagnetActivated?.Invoke();
-        // DisableMagnet();
-        GetComponentInChildren<Powerup>().Expire();
+        if (powerupController != null && powerupController.TryGetActivePowerup(PowerupType.Magnet, out Powerup magnetPowerup))
+        {
+            magnetPowerup.Expire();
+        }
+        else
+        {
+            DisableMagnet();
+        }
+
         return true;
     }
 }
 
-// TO DETERMINE: IS IsActive (and PlayerMagnet.cs - apart from TryBlockHit) even necessary? WHen magnet activates, we simply
-// expire the powerup,which destroys the instance anyway
+// TO DETERMINE: IS IsActive (and PlayerMagnet.cs - apart from TryBlockHit) even necessary? When magnet activates, we simply
+// expire the powerup, which destroys the instance anyway

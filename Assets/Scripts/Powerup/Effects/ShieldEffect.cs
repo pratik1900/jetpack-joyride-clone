@@ -17,6 +17,12 @@ public class ShieldEffect : PowerupEffect
             return;
         }
 
+        if (powerupController.Shield == null)
+        {
+            Debug.LogWarning("ShieldEffect could not find PlayerShield.");
+            return;
+        }
+
         powerupController.Shield.EnableShield();
     }
 

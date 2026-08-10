@@ -107,6 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b62566246ce398042a455f5c2124509f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Powerup
+  type: 0
   timer: 8
   expiryTrigger: {fileID: 758279704559250240}
   effect: {fileID: 2644070224032665917}

@@ -3,9 +3,18 @@ using UnityEngine;
 
 #nullable enable
 
+public enum PowerupType
+{
+    Shield,
+    Magnet
+}
+
 public class Powerup : MonoBehaviour
 {
     // References
+    [SerializeField]
+    private PowerupType type;
+
     [SerializeField]
     private float timer;
 
@@ -20,12 +29,18 @@ public class Powerup : MonoBehaviour
 
     // Properties (for access)
     // public IEffect Effect => effect;
+    public PowerupType Type => type;
+
     private bool _isExpired = false;
     private IEnumerator? _expiryCoroutine;
+    private PlayerPowerupController? _powerupController;
 
     // Call this when the player picks up the powerup
     public void Activate()
     {
+        _powerupController = GetComponentInParent<PlayerPowerupController>();
+        _powerupController?.RegisterActivePowerup(this);
+
         // APPLY EFFECT
         effect?.Apply();
 
@@ -76,6 +91,8 @@ public class Powerup : MonoBehaviour
             return;
 
         _isExpired = true;
+        _powerupController?.UnregisterActivePowerup(this);
+
         // Undo the effects of the powerup
         effect?.Remove();
 

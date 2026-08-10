@@ -63,10 +63,9 @@ public class PowerupPickup : MonoBehaviour, IPooledObject
         }
 
         //Check if Powerup of the same type is already active, if so refresh the timer and return to pool
-        Transform overlappingPowerup = GetOverlappingPowerup();
-        if (overlappingPowerup != null)
+        if (powerupController.TryGetActivePowerup(selectedPowerupPrefab.Type, out Powerup overlappingPowerup))
         {
-            overlappingPowerup.GetComponent<Powerup>().RefreshExpiryTimerIfPresent();
+            overlappingPowerup.RefreshExpiryTimerIfPresent();
             ReturnToPool();
             return;
         }
@@ -125,17 +124,4 @@ public class PowerupPickup : MonoBehaviour, IPooledObject
         }
     }
 
-    private Transform GetOverlappingPowerup()
-    {
-        foreach (Transform child in powerupController.ActivePowerupRoot)
-        {
-            string childName = child.name.Replace("(Clone)", "").Trim();
-            if (selectedPowerupPrefab.name == childName)
-            {
-                return child;
-            }
-        }
-
-        return null;
-    }
 }

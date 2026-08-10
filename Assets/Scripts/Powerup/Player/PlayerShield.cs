@@ -6,6 +6,12 @@ public class PlayerShield : MonoBehaviour
     public event Action OnShieldBlockedHit;
 
     public bool IsActive { get; private set; }
+    private PlayerPowerupController powerupController;
+
+    private void Awake()
+    {
+        powerupController = GetComponent<PlayerPowerupController>();
+    }
 
     public void EnableShield()
     {
@@ -23,11 +29,18 @@ public class PlayerShield : MonoBehaviour
             return false;
 
         OnShieldBlockedHit?.Invoke();
-        // DisableShield();
-        GetComponentInChildren<Powerup>().Expire();
+        if (powerupController != null && powerupController.TryGetActivePowerup(PowerupType.Shield, out Powerup shieldPowerup))
+        {
+            shieldPowerup.Expire();
+        }
+        else
+        {
+            DisableShield();
+        }
+
         return true;
     }
 }
 
-// TO DETERMINE: IS IsActive (and PlayerShield.cs - apart from TryBlockHit) even necessary? WHen shield blocks hit, we simply
-// expire the powerup,which destroys the instance anyway
+// TO DETERMINE: IS IsActive (and PlayerShield.cs - apart from TryBlockHit) even necessary? When shield blocks hit, we simply
+// expire the powerup, which destroys the instance anyway
