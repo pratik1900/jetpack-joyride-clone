@@ -6,7 +6,7 @@ using UnityEngine;
 public enum PowerupType
 {
     Shield,
-    Magnet
+    Magnet,
 }
 
 public class Powerup : MonoBehaviour
@@ -39,10 +39,11 @@ public class Powerup : MonoBehaviour
     public void Activate()
     {
         _powerupController = GetComponentInParent<PlayerPowerupController>();
-        _powerupController?.RegisterActivePowerup(this);
 
         // APPLY EFFECT
         effect?.Apply();
+
+        _powerupController?.RegisterActivePowerup(this);
 
         // SET UP EXPIRY
 
