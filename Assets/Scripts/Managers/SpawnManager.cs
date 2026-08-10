@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] private float spawnInterval = 2.0f;
-
+    [SerializeField]
+    private float spawnInterval = 2.0f;
 
     private float maxSpawnY = 1.75f;
     private float minSpawnY = -1.75f;
     private float spawnX = 15.0f;
 
     private Dictionary<string, SpawnHandler> _handlers;
-
 
     void Start()
     {
@@ -26,10 +25,7 @@ public class SpawnManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-
-    }
+    void Update() { }
 
     IEnumerator SpawnCoroutine()
     {
@@ -37,15 +33,13 @@ public class SpawnManager : MonoBehaviour
         {
             yield return new WaitForSeconds(spawnInterval);
 
-            Vector3 spawnPos = new Vector3(
-                spawnX,
-                Random.Range(minSpawnY, maxSpawnY)
-            );
+            Vector3 spawnPos = new Vector3(spawnX, Random.Range(minSpawnY, maxSpawnY));
 
             string objTagToSpawn = RandomObjectTagToSpawn();
 
-            if (string.IsNullOrEmpty(objTagToSpawn) ||
-                !_handlers.TryGetValue(objTagToSpawn, out SpawnHandler handler)
+            if (
+                string.IsNullOrEmpty(objTagToSpawn)
+                || !_handlers.TryGetValue(objTagToSpawn, out SpawnHandler handler)
             )
             {
                 Debug.LogWarning("No Object Tag found for spawning");
@@ -53,12 +47,6 @@ public class SpawnManager : MonoBehaviour
             }
 
             handler.Spawn(spawnPos);
-
-            // ObjectPooler.Instance.SpawnFromPool(
-            //     objTagToSpawn,
-            //     spawnPos,
-            //     Quaternion.Euler(0, 0, Random.Range(0, 360))
-            // );
         }
     }
 
@@ -72,7 +60,9 @@ public class SpawnManager : MonoBehaviour
             return null;
         }
 
-        string objTagToSpawn = pooler.poolsDetailsList[Random.Range(0, pooler.poolsDetailsList.Count)].tag;
+        string objTagToSpawn = pooler
+            .poolsDetailsList[Random.Range(0, pooler.poolsDetailsList.Count)]
+            .tag;
         return objTagToSpawn;
     }
 }

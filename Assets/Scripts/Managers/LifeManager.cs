@@ -4,7 +4,8 @@ public class LifeManager : MonoBehaviour
 {
     public static LifeManager Instance;
 
-    private int lives = 3;
+    private int lives_current = 3;
+    private int lives_max = 3;
 
     void Awake()
     {
@@ -14,39 +15,51 @@ public class LifeManager : MonoBehaviour
             return;
         }
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
     {
         // set up initial life display
-        GameEvents.TriggerLivesChanged(lives);
+        GameEvents.TriggerLivesChanged(lives_current);
     }
 
     void OnEnable()
     {
-        GameEvents.OnPlayerHit += LoseLife;
+        GameEvents.OnPlayerHit += ProcessPlayerHit;
+        GameEvents.OnPlayerLifeGain += AddLife;
     }
 
     void OnDisable()
     {
-        GameEvents.OnPlayerHit -= LoseLife;
+        GameEvents.OnPlayerHit -= ProcessPlayerHit;
+        GameEvents.OnPlayerLifeGain -= AddLife;
     }
 
     public void AddLife()
     {
-        lives++;
-        GameEvents.TriggerLivesChanged(lives);
+        if (!(lives_current < lives_max))
+        {
+            return;
+        }
+        lives_current++;
+        GameEvents.TriggerLivesChanged(lives_current);
     }
 
     public void LoseLife()
     {
-        lives--;
-        GameEvents.TriggerLivesChanged(lives);
+        lives_current--;
+        GameEvents.TriggerLivesChanged(lives_current);
 
-        if (lives <= 0)
+        if (lives_current <= 0)
         {
-            // Trigger Game Over Event 
+            // Trigger Game Over Event
             GameEvents.TriggerGameOver();
         }
+    }
+
+    public void ProcessPlayerHit()
+    {
+        LoseLife();
     }
 }

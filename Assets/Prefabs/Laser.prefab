@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1512575652572441765}
   - component: {fileID: 7856844367054799917}
   - component: {fileID: 7506489521145866454}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LaserBeam
   m_TagString: Laser
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 5947231275191037608}
   - component: {fileID: -5354138461397598155}
   - component: {fileID: 6174049290445761437}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Laser
   m_TagString: Hazard
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1789765850433736874}
   - component: {fileID: 3651461977154928435}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cap2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -348,7 +348,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8483995533360255022}
   - component: {fileID: 4375981705699900397}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cap1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

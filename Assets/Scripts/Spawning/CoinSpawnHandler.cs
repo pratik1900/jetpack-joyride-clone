@@ -29,7 +29,6 @@ public class CoinSpawnHandler : SpawnHandler
         new CoinGridFormation("3x4", 3, 4, 1.0f),
     };
 
-
     public override ObjectTags ObjectTag => ObjectTags.Coin;
 
     public override void Spawn(Vector3 position)
@@ -49,11 +48,7 @@ public class CoinSpawnHandler : SpawnHandler
                     position.z
                 );
 
-                ObjectPooler.Instance.SpawnFromPool(
-                    ObjectTag.ToString(),
-                    pos,
-                    Quaternion.identity
-                );
+                ObjectPooler.Instance.SpawnFromPool(ObjectTag.ToString(), pos, Quaternion.identity);
             }
         }
     }

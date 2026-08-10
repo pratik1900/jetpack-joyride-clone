@@ -9,6 +9,10 @@ TagManager:
   - Laser
   - Coin
   - Hazard
+  - Shield
+  - PowerupPickup
+  - PowerupController
+  - Magnet
   layers:
   - Default
   - TransparentFX
@@ -20,8 +24,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - Player
+  - Hazard
   - 
   - 
   - 

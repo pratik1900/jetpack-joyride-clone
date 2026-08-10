@@ -4,18 +4,28 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
-
     [Header("--- Audio Sources ---")]
-    [SerializeField] AudioSource SFXSource;
-    [SerializeField] AudioSource musicSource;
+    [SerializeField]
+    AudioSource SFXSource;
+
+    [SerializeField]
+    AudioSource musicSource;
 
     [Header("--- Audio Clips ---")]
-    [SerializeField] public AudioClip coinSFX;
-    [SerializeField] public AudioClip playerHitSFX;
-    // [SerializeField] AudioClip laserSFX;
+    [SerializeField]
+    public AudioClip coinSFX;
+
+    [SerializeField]
+    public AudioClip playerHitSFX;
+
+    [SerializeField]
+    public AudioClip playerLifeGainSFX;
+
+    // [SerializeField] AudioClip pSFX;
     // [SerializeField] AudioClip deathSFX;
     // [SerializeField] AudioClip thrusterSFX;
-    [SerializeField] public AudioClip backgroundMusic;
+    [SerializeField]
+    public AudioClip backgroundMusic;
 
     private void Awake()
     {
@@ -34,12 +44,24 @@ public class AudioManager : MonoBehaviour
 
     void OnEnable()
     {
-        GameEvents.OnPlayerHit += () => PlaySFX(playerHitSFX);
+        GameEvents.OnPlayerHit += OnPlayerHit;
+        GameEvents.OnPlayerLifeGain += OnPlayerLifeGain;
     }
 
     void OnDisable()
     {
-        GameEvents.OnPlayerHit -= () => PlaySFX(playerHitSFX);
+        GameEvents.OnPlayerHit -= OnPlayerHit;
+        GameEvents.OnPlayerLifeGain -= OnPlayerLifeGain;
+    }
+
+    private void OnPlayerHit()
+    {
+        PlaySFX(playerHitSFX);
+    }
+
+    private void OnPlayerLifeGain()
+    {
+        PlaySFX(playerLifeGainSFX);
     }
 
     public void PlaySFX(AudioClip clip)
