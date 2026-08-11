@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PowerupPickup : MonoBehaviour, IPooledObject
@@ -63,7 +62,12 @@ public class PowerupPickup : MonoBehaviour, IPooledObject
         }
 
         //Check if Powerup of the same type is already active, if so refresh the timer and return to pool
-        if (powerupController.TryGetActivePowerup(selectedPowerupPrefab.Type, out Powerup overlappingPowerup))
+        if (
+            powerupController.TryGetActivePowerup(
+                selectedPowerupPrefab.Type,
+                out Powerup overlappingPowerup
+            )
+        )
         {
             overlappingPowerup.RefreshExpiryTimerIfPresent();
             ReturnToPool();
@@ -102,7 +106,6 @@ public class PowerupPickup : MonoBehaviour, IPooledObject
         Powerup selectedPowerup = availablePowerupPrefabs[
             Random.Range(0, availablePowerupPrefabs.Length)
         ];
-        Debug.Log($"Picked random powerup: {selectedPowerup.name}");
         SetIconForPickup(selectedPowerup);
 
         return selectedPowerup;
@@ -123,5 +126,4 @@ public class PowerupPickup : MonoBehaviour, IPooledObject
             iconRenderer.sprite = icon;
         }
     }
-
 }

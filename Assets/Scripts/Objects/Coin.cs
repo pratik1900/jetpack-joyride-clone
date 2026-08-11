@@ -13,8 +13,6 @@ public class Coin : MonoBehaviour, IPooledObject
     private float currentSpeed;
     private float acceleration = 15.0f; // Adjust the accelerations as needed
 
-    void Start() { }
-
     void Update()
     {
         if (gameObject.transform.position.x < leftBoundary)
@@ -43,11 +41,6 @@ public class Coin : MonoBehaviour, IPooledObject
         if (collision.CompareTag("Player"))
         {
             CollectCoin();
-        }
-
-        if (collision.CompareTag("Magnet"))
-        {
-            isMagnetized = true;
         }
     }
 

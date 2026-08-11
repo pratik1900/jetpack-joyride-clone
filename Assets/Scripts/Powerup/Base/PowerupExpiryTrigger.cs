@@ -1,14 +1,6 @@
 using System;
 using UnityEngine;
 
-// public interface IExpiryTrigger
-// {
-//     // event Action Triggered;
-//     event Action OnPowerupExpired;
-//     void Init();
-//     void Dispose();
-// }
-
 public abstract class PowerupExpiryTrigger : MonoBehaviour
 {
     public event Action OnPowerupExpired;
