@@ -7,6 +7,7 @@ public enum PowerupType
 {
     Shield,
     Magnet,
+    Life,
 }
 
 public class Powerup : MonoBehaviour
