@@ -554,6 +554,67 @@ RectTransform:
   m_AnchoredPosition: {x: 18.400146, y: -148.1}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 1}
+--- !u!1 &345570669
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 345570670}
+  - component: {fileID: 345570671}
+  m_Layer: 0
+  m_Name: CoinSpawnHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &345570670
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345570669}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 7.3733897, y: 3.0918, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1522978707}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &345570671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345570669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4198039a6f3777488a8cb594115daa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CoinSpawnHandler
+  formations:
+  - name: 2x3
+    rows: 2
+    cols: 3
+    spacing: 1
+  - name: 2x4
+    rows: 2
+    cols: 4
+    spacing: 1
+  - name: 3x3
+    rows: 3
+    cols: 3
+    spacing: 1
+  - name: 3x4
+    rows: 3
+    cols: 4
+    spacing: 1
 --- !u!1 &467345720
 GameObject:
   m_ObjectHideFlags: 0
@@ -965,7 +1026,7 @@ MonoBehaviour:
     size: 3
   - tag: Coin
     prefab: {fileID: 1773931007493890303, guid: 2c3b675f4bf422e4082d5d550eb9dd7f, type: 3}
-    size: 30
+    size: 60
   - tag: PowerupPickup
     prefab: {fileID: 2864674172105702133, guid: ce093f9151b75684aba329c8f862e588, type: 3}
     size: 1
@@ -1257,6 +1318,50 @@ Transform:
   - {fileID: 970602076}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &786838009
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 786838010}
+  - component: {fileID: 786838011}
+  m_Layer: 0
+  m_Name: PowerupPickupSpawnHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &786838010
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786838009}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 7.3733897, y: 3.0918, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1522978707}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &786838011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786838009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed62b27645840b746aec89c8565c5dc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PowerupPickupSpawnHandler
 --- !u!1 &822266705
 GameObject:
   m_ObjectHideFlags: 0
@@ -2079,6 +2184,74 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2046165371}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1522978705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1522978707}
+  - component: {fileID: 1522978706}
+  m_Layer: 0
+  m_Name: ScenarioSpawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1522978706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522978705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39bb1c9ca26895d4ca6fe886c9529bce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScenarioSpawnManager
+  spawnOriginX: 15
+  spawnOriginY: 0
+  currentDifficulty: 0
+  scenarios:
+  - {fileID: 11400000, guid: 453854feafd42a949a4ea8c2235f71ec, type: 2}
+  - {fileID: 11400000, guid: f1ab885a3a21ab2459c053454eed16c4, type: 2}
+  - {fileID: 11400000, guid: 41ba78bc4853ef04d87c04c702efd1c2, type: 2}
+  - {fileID: 11400000, guid: eae890f1a46faf840ac5e013834f4e8d, type: 2}
+  - {fileID: 11400000, guid: 8f3704c4fbe50354fbc296f5702eecb3, type: 2}
+  - {fileID: 11400000, guid: d22f311c38cc3c341a089a7419cb67d3, type: 2}
+  - {fileID: 11400000, guid: 3075285e65f2df848ac65aedbf0b7f29, type: 2}
+  - {fileID: 11400000, guid: 99eb52144fe6d06488acb90b1d797a35, type: 2}
+  - {fileID: 11400000, guid: 6198a8dfa69da8c42bf757707709043f, type: 2}
+  - {fileID: 11400000, guid: e1bdde087ae3a2b438c5f11f871d9aa3, type: 2}
+  - {fileID: 11400000, guid: 87de19dee4b645a489476e8e5a514f88, type: 2}
+  - {fileID: 11400000, guid: 4120b7b883f00f442b7c6ca1538418bc, type: 2}
+  - {fileID: 11400000, guid: 9e0c920502ce40f44bc33639df14e970, type: 2}
+  - {fileID: 11400000, guid: ea9489d7513028e469ad57bc8940f95d, type: 2}
+  - {fileID: 11400000, guid: 8176d59d9a1ebbc43a762c1fe3526be0, type: 2}
+  - {fileID: 11400000, guid: 4794d790f2b391548a1e632378d8eb4c, type: 2}
+  - {fileID: 11400000, guid: 137140f858cbcfc468a518d9cda52a11, type: 2}
+--- !u!4 &1522978707
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522978705}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.73341, y: -0.85651, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 345570670}
+  - {fileID: 2119039313}
+  - {fileID: 786838010}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1601644012
 GameObject:
   m_ObjectHideFlags: 0
@@ -2748,6 +2921,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de6608c4dafebb48a8fb5faf65f7309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMagnet
+--- !u!1 &2119039312
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2119039313}
+  - component: {fileID: 2119039314}
+  m_Layer: 0
+  m_Name: LaserSpawnHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2119039313
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2119039312}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 7.3733897, y: 3.0918, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1522978707}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2119039314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2119039312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c175b12252b3e468c283a90b3fe370, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LaserSpawnHandler
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2765,3 +2982,4 @@ SceneRoots:
   - {fileID: 37712742}
   - {fileID: 224423407}
   - {fileID: 861448512}
+  - {fileID: 1522978707}

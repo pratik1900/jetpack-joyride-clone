@@ -21,7 +21,7 @@ public class SpawnManager : MonoBehaviour
         {
             _handlers[handler.ObjectTag.ToString()] = handler;
         }
-        StartCoroutine(SpawnCoroutine());
+        // StartCoroutine(SpawnCoroutine());
     }
 
     IEnumerator SpawnCoroutine()
