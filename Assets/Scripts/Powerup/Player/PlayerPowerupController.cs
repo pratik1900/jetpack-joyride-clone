@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerPowerupController : MonoBehaviour
 {
@@ -18,6 +18,9 @@ public class PlayerPowerupController : MonoBehaviour
     public PlayerMagnet Magnet => magnet;
 
     private readonly Dictionary<PowerupType, Powerup> activePowerups = new();
+
+    //For UI
+    public IReadOnlyDictionary<PowerupType, Powerup> ActivePowerups => activePowerups;
 
     private void Awake()
     {
@@ -54,7 +57,10 @@ public class PlayerPowerupController : MonoBehaviour
             return;
         }
 
-        if (activePowerups.TryGetValue(powerup.Type, out Powerup activePowerup) && activePowerup == powerup)
+        if (
+            activePowerups.TryGetValue(powerup.Type, out Powerup activePowerup)
+            && activePowerup == powerup
+        )
         {
             activePowerups.Remove(powerup.Type);
         }
