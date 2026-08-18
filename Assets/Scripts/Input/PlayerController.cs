@@ -79,7 +79,6 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("Hazard"))
         {
-            Debug.Log("Check 1");
             ProcessHazardHit(collision);
         }
     }
