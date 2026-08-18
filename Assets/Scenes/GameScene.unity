@@ -624,6 +624,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 354471826}
+  - component: {fileID: 354471827}
   m_Layer: 5
   m_Name: PowerupUI
   m_TagString: Untagged
@@ -651,6 +652,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 649}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &354471827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354471825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fb9d6b1448c0204981174bc2d6d6889, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PowerupUI
+  activePowerupUISlots: []
+  powerupUISlotPrefab: {fileID: 2421440029416577043, guid: 6150b6f08bfad944a82ddbbf1dc76f14, type: 3}
 --- !u!1 &467345720
 GameObject:
   m_ObjectHideFlags: 0
@@ -1670,9 +1685,8 @@ GameObject:
   m_Component:
   - component: {fileID: 881350281}
   - component: {fileID: 881350282}
-  - component: {fileID: 881350283}
   m_Layer: 5
-  m_Name: PowerupIconsContainer
+  m_Name: PowerupUISlotContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1724,18 +1738,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &881350283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 881350280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fb9d6b1448c0204981174bc2d6d6889, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PowerupUI
 --- !u!1 &970602075
 GameObject:
   m_ObjectHideFlags: 0

@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 1545968221826940391}
   - component: {fileID: 6669896643171416553}
   - component: {fileID: 4467626052315092571}
+  - component: {fileID: -7558146888625989054}
   m_Layer: 5
   m_Name: PowerupUISlotTemplate
   m_TagString: Untagged
@@ -253,7 +254,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 484060777272818460, guid: 5b84e3620f6cd3a46b867114afcb4c21, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -263,6 +264,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-7558146888625989054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2421440029416577043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b3c1f5700aed4428629ac2d3b06723, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PowerupUISlot
+  powerupType: 0
+  hasTimer: 0
+  remainingTimePercent: 0
 --- !u!1001 &9054931175315328636
 PrefabInstance:
   m_ObjectHideFlags: 0

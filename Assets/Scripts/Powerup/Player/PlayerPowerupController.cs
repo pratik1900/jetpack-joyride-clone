@@ -48,6 +48,9 @@ public class PlayerPowerupController : MonoBehaviour
         }
 
         activePowerups[powerup.Type] = powerup;
+
+        //  For updating the powerup UI slots
+        GameEvents.TriggerPowerupActivated();
     }
 
     public void UnregisterActivePowerup(Powerup powerup)
@@ -63,6 +66,9 @@ public class PlayerPowerupController : MonoBehaviour
         )
         {
             activePowerups.Remove(powerup.Type);
+
+            //  For updating the powerup UI slots
+            GameEvents.TriggerPowerupExpired();
         }
     }
 

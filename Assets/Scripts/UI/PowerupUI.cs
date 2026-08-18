@@ -5,9 +5,16 @@ using UnityEngine.UI;
 public class PowerupUI : MonoBehaviour
 {
     [SerializeField]
-    PowerupUISlot[] activePowerups;
+    PowerupUISlot[] activePowerupUISlots; // Array to hold references to the active powerup UI slots (game objects)
+
+    // PowerupUISlot[] activePowerups;
 
     private PlayerPowerupController playerPowerupController;
+
+    [SerializeField]
+    private GameObject powerupUISlotPrefab;
+
+    private GameObject powerupUISlotsContainer;
 
     private void Start()
     {
@@ -15,13 +22,14 @@ public class PowerupUI : MonoBehaviour
         GameEvents.OnPowerupExpired += UpdateActivePowerups;
 
         playerPowerupController = Object.FindAnyObjectByType<PlayerPowerupController>();
+        powerupUISlotsContainer = gameObject.transform.GetChild(0).gameObject;
     }
 
     private void Update()
     {
-        foreach (var slot in activePowerups)
+        foreach (var slot in activePowerupUISlots)
         {
-            if (slot.hasTimer && slot.timerBarImage != null)
+            if (slot.hasTimer)
             {
                 if (
                     playerPowerupController.ActivePowerups.TryGetValue(
@@ -30,7 +38,7 @@ public class PowerupUI : MonoBehaviour
                     )
                 )
                 {
-                    slot.timerBarImage.fillAmount = powerupData.RemainingTimePercent;
+                    slot.remainingTimePercent = powerupData.RemainingTimePercent;
                 }
             }
         }
@@ -46,37 +54,49 @@ public class PowerupUI : MonoBehaviour
 
         var activePowerupsDict = playerPowerupController.ActivePowerups;
 
-        for (int i = 0; i < activePowerupsDict.Count; i++)
-        {
-            var powerupType = activePowerupsDict.Keys.ElementAt(i);
-            var powerupData = activePowerupsDict[powerupType];
+        activePowerupUISlots = powerupUISlotsContainer.GetComponentsInChildren<PowerupUISlot>();
 
-            // Find the corresponding slot for this powerup type
-            var slot = System.Array.Find(activePowerups, s => s.powerupType == powerupType);
-            if (slot != null)
+        foreach (var activePowerup in activePowerupsDict)
+        {
+            var powerupType = activePowerup.Key;
+            var powerupData = activePowerup.Value;
+
+            // Now i need a way to connect the activePowerup from the dictionary to the corresponding UI slot in activePowerupUISlots.
+            var uiSlot = activePowerupUISlots.FirstOrDefault(s => s.powerupType == powerupType);
+            if (uiSlot != null)
             {
-                // reset timer ui
-                // slot.durationSlider.value = powerupData.RemainingDuration;
+                RefreshPowerupUISlot(uiSlot, powerupData);
             }
             else
             {
-                PowerupUISlot newSlot = new PowerupUISlot
-                {
-                    powerupType = powerupType,
-                    iconSprite = powerupData.Icon, // Assign the appropriate Image component
-                    timerBarImage = null, // Assign the appropriate Image component
-                    hasTimer = powerupData.HasTimer,
-                };
+                // If no existing slot found, create a new UI slot for the active powerup
+                CreatePowerupUISlot(powerupType, powerupData);
             }
         }
     }
-}
 
-[System.Serializable]
-public class PowerupUISlot
-{
-    public PowerupType powerupType;
-    public Sprite iconSprite;
-    public Image timerBarImage;
-    public bool hasTimer;
+    private void CreatePowerupUISlot(PowerupType powerupType, Powerup powerupData)
+    {
+        GameObject newSlot = Instantiate(powerupUISlotPrefab, powerupUISlotsContainer.transform);
+        PowerupUISlot newPowerupUISlot = newSlot.GetComponent<PowerupUISlot>();
+        newPowerupUISlot.powerupType = powerupType;
+        newPowerupUISlot.hasTimer = powerupData.HasTimer;
+        if (powerupData.HasTimer)
+        {
+            newPowerupUISlot.remainingTimePercent = powerupData.RemainingTimePercent;
+        }
+        Image iconImage = newSlot.transform.GetComponent<Image>();
+        if (iconImage != null)
+        {
+            iconImage.sprite = powerupData.Icon;
+        }
+    }
+
+    private void RefreshPowerupUISlot(PowerupUISlot uiSlot, Powerup powerupData)
+    {
+        if (powerupData.HasTimer)
+        {
+            uiSlot.remainingTimePercent = powerupData.RemainingTimePercent;
+        }
+    }
 }
