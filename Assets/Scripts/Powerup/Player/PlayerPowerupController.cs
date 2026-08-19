@@ -68,7 +68,7 @@ public class PlayerPowerupController : MonoBehaviour
             activePowerups.Remove(powerup.Type);
 
             //  For updating the powerup UI slots
-            GameEvents.TriggerPowerupExpired();
+            GameEvents.TriggerPowerupExpired(powerup.Type);
         }
     }
 

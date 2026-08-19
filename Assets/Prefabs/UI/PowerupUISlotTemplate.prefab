@@ -178,10 +178,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 6942309026744112688, guid: d8727cef9bbce904b9facbe31d14afe4, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -215,7 +215,7 @@ RectTransform:
   m_GameObject: {fileID: 2421440029416577043}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.29, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6654894591451110849}
@@ -224,7 +224,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 95.616135, y: 100}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6669896643171416553
 CanvasRenderer:
@@ -374,6 +374,14 @@ PrefabInstance:
     - target: {fileID: 6226139361754950503, guid: f7f438ebcd425e24192a468b8e82d922, type: 3}
       propertyPath: m_Name
       value: PowerupTimerBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514895972497260238, guid: f7f438ebcd425e24192a468b8e82d922, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514895972497260238, guid: f7f438ebcd425e24192a468b8e82d922, type: 3}
+      propertyPath: m_FillMethod
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

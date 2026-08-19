@@ -4,44 +4,29 @@ using UnityEngine.UI;
 
 public class PowerupUI : MonoBehaviour
 {
-    [SerializeField]
-    PowerupUISlot[] activePowerupUISlots; // Array to hold references to the active powerup UI slots (game objects)
-
-    // PowerupUISlot[] activePowerups;
-
     private PlayerPowerupController playerPowerupController;
 
     [SerializeField]
     private GameObject powerupUISlotPrefab;
 
     private GameObject powerupUISlotsContainer;
+    PowerupUISlot[] activePowerupUISlots; // Array to hold references to the active powerup UI slots (game objects)
+
+    // private readonly Dictionary<PowerupType, PowerupUISlot> activeSlots = new();
 
     private void Start()
     {
         GameEvents.OnPowerupActivated += UpdateActivePowerups;
-        GameEvents.OnPowerupExpired += UpdateActivePowerups;
+        GameEvents.OnPowerupExpired += RemovePowerupUISlot;
 
         playerPowerupController = Object.FindAnyObjectByType<PlayerPowerupController>();
         powerupUISlotsContainer = gameObject.transform.GetChild(0).gameObject;
     }
 
-    private void Update()
+    private void OnDestroy()
     {
-        foreach (var slot in activePowerupUISlots)
-        {
-            if (slot.hasTimer)
-            {
-                if (
-                    playerPowerupController.ActivePowerups.TryGetValue(
-                        slot.powerupType,
-                        out Powerup powerupData
-                    )
-                )
-                {
-                    slot.remainingTimePercent = powerupData.RemainingTimePercent;
-                }
-            }
-        }
+        GameEvents.OnPowerupActivated -= UpdateActivePowerups;
+        GameEvents.OnPowerupExpired -= RemovePowerupUISlot;
     }
 
     private void UpdateActivePowerups()
@@ -54,7 +39,7 @@ public class PowerupUI : MonoBehaviour
 
         var activePowerupsDict = playerPowerupController.ActivePowerups;
 
-        activePowerupUISlots = powerupUISlotsContainer.GetComponentsInChildren<PowerupUISlot>();
+        activePowerupUISlots = GetLatestActivePowerUISlots();
 
         foreach (var activePowerup in activePowerupsDict)
         {
@@ -98,5 +83,21 @@ public class PowerupUI : MonoBehaviour
         {
             uiSlot.remainingTimePercent = powerupData.RemainingTimePercent;
         }
+    }
+
+    private void RemovePowerupUISlot(PowerupType powerupType)
+    {
+        var activePowerupUISlots = GetLatestActivePowerUISlots();
+
+        var uiSlot = activePowerupUISlots.FirstOrDefault(s => s.powerupType == powerupType);
+        if (uiSlot != null)
+        {
+            Destroy(uiSlot.gameObject);
+        }
+    }
+
+    private PowerupUISlot[] GetLatestActivePowerUISlots()
+    {
+        return powerupUISlotsContainer.GetComponentsInChildren<PowerupUISlot>();
     }
 }

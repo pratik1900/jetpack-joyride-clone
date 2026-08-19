@@ -43,7 +43,7 @@ public class Powerup : MonoBehaviour
     // public float RemainingTime => Mathf.Max(0f, expiryTime - Time.time);
     // public float RemainingTimePercent => timer > 0f ? RemainingTime / timer : 0f;
     public float RemainingTimePercent =>
-        timer > 0f ? Mathf.Max(0f, expiryTime - Time.deltaTime) / timer : 0f;
+        timer > 0f ? Mathf.Max(0f, expiryTime - Time.time) / timer : 0f;
 
     public bool HasTimer => timer > 0f;
 

@@ -10,9 +10,13 @@ public class PowerupUISlot : MonoBehaviour
     private GameObject timerBar;
     private UnityEngine.UI.Image timerBarImage;
 
+    private PlayerPowerupController playerPowerupController;
+    private Powerup powerupData;
+
     private void Start()
     {
-        timerBar = transform.GetChild(0).gameObject;
+        playerPowerupController = Object.FindAnyObjectByType<PlayerPowerupController>();
+        timerBar = transform.GetChild(0).GetChild(1).gameObject;
 
         if (timerBar != null && hasTimer)
         {
@@ -23,13 +27,36 @@ public class PowerupUISlot : MonoBehaviour
         {
             timerBar.SetActive(false);
         }
+
+        BindPowerupData();
     }
 
     private void Update()
     {
-        if (hasTimer && timerBarImage != null)
+        if (hasTimer)
         {
+            if (timerBarImage == null)
+            {
+                Debug.LogWarning("Timer bar image is not assigned.");
+                return;
+            }
+
+            remainingTimePercent = powerupData.RemainingTimePercent;
             timerBarImage.fillAmount = remainingTimePercent;
+        }
+    }
+
+    private void BindPowerupData()
+    {
+        if (
+            playerPowerupController != null
+            && playerPowerupController.ActivePowerups.TryGetValue(
+                powerupType,
+                out Powerup powerupData
+            )
+        )
+        {
+            this.powerupData = powerupData;
         }
     }
 }
