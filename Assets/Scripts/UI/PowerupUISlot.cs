@@ -1,6 +1,5 @@
 using UnityEngine;
 
-// Not sure about this
 public class PowerupUISlot : MonoBehaviour
 {
     public PowerupType powerupType;

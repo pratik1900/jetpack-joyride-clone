@@ -9,6 +9,7 @@ public static class GameEvents
     public static event Action OnPlayerLifeGain;
     public static event Action OnPowerupActivated;
     public static event Action<PowerupType> OnPowerupExpired;
+    public static event Action<int> OnUpdateScoreMultiplier;
 
     // Trigger functions (used because the actions can only be invoked inside the class they are defined in, when we use the 'event' keyword while defining them. The 'event' keyword is necessary to protect the actions from accidental overwrites from other classes)
     public static void TriggerPlayerHit() => OnPlayerHit?.Invoke();
@@ -22,4 +23,7 @@ public static class GameEvents
     public static void TriggerPowerupActivated() => OnPowerupActivated?.Invoke();
 
     public static void TriggerPowerupExpired(PowerupType type) => OnPowerupExpired?.Invoke(type);
+
+    public static void TriggerUpdateScoreMultiplier(int multiplier) =>
+        OnUpdateScoreMultiplier?.Invoke(multiplier);
 }

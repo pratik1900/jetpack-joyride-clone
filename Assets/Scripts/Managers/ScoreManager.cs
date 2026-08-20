@@ -7,6 +7,8 @@ public class ScoreManager : MonoBehaviour
     public int score { get; private set; }
     public int highScore { get; private set; }
 
+    private int scoreMultiplier = 1;
+
     [SerializeField]
     private TMP_Text scoreTextValue;
 
@@ -30,22 +32,29 @@ public class ScoreManager : MonoBehaviour
     void OnEnable()
     {
         GameEvents.OnGameOver += SaveHighScore;
+        GameEvents.OnUpdateScoreMultiplier += UpdateScoreMultiplier;
     }
 
     void OnDisable()
     {
         GameEvents.OnGameOver -= SaveHighScore;
+        GameEvents.OnUpdateScoreMultiplier -= UpdateScoreMultiplier;
     }
 
     public void IncrementScore()
     {
-        score++;
+        score = score + (1 * scoreMultiplier);
 
         if (score >= highScore)
         {
             highScore = score;
         }
         UpdateScoreUI();
+    }
+
+    private void UpdateScoreMultiplier(int multiplier)
+    {
+        scoreMultiplier = multiplier;
     }
 
     public void HighScoreInitialLoad()
