@@ -6,4 +6,9 @@ public abstract class SpawnHandler : MonoBehaviour
 
     // Stores the custom spawn logic for different handlers (corresponding to different obj types)
     public abstract void Spawn(Vector3 position);
+
+    public virtual void Spawn(Vector3 position, SpawnOptions options)
+    {
+        Spawn(position);
+    }
 }

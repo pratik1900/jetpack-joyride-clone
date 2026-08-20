@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Laser : MonoBehaviour, IPooledObject
@@ -14,11 +13,7 @@ public class Laser : MonoBehaviour, IPooledObject
         }
     }
 
-    public void OnObjectSpawn()
-    {
-        // Post-Spawn Logic
-        // Debug.Log("Laser Spawned!");
-    }
+    public void OnObjectSpawn() { }
 
     public void ReturnToPool()
     {

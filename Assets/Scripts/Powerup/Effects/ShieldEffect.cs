@@ -40,7 +40,6 @@ public class ShieldEffect : PowerupEffect
     {
         if (collision.CompareTag("Hazard"))
         {
-            Debug.Log("Check 2");
             playerController.ProcessHazardHit(collision);
         }
     }

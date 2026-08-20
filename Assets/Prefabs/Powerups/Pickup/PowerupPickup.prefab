@@ -159,6 +159,8 @@ MonoBehaviour:
   availablePowerupPrefabs:
   - {fileID: 8032361356078842963, guid: a44c71c3ccd1d0243b9be2c40b9b2ea1, type: 3}
   - {fileID: 8736539885793132695, guid: 54e1bdd7597032e49990350c4b7f0495, type: 3}
+  - {fileID: 3453507386990028250, guid: c37529ad4afe6334f9816a8e5c285fb4, type: 3}
+  - {fileID: 5235118824254359640, guid: 34622b7386ad60947870bacf4fdcc29a, type: 3}
   leftBoundary: -15
   powerupController: {fileID: 0}
 --- !u!1 &8590783592283378737

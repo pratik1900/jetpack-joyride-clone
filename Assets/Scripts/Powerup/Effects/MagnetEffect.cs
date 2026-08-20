@@ -38,12 +38,6 @@ public class MagnetEffect : PowerupEffect
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // if (collision.CompareTag("Hazard"))
-        // {
-        //     Debug.Log("Check 2");
-        //     playerController.ProcessHazardHit(collision);
-        // }
-
         if (collision.CompareTag("Coin"))
         {
             collision.GetComponent<Coin>().StartMovingTowardsPlayer();

@@ -22,24 +22,6 @@ public class PlayerMagnet : MonoBehaviour
     {
         IsActive = false;
     }
-
-    public bool TryBlockHit()
-    {
-        if (!IsActive)
-            return false;
-
-        OnMagnetActivated?.Invoke();
-        if (powerupController != null && powerupController.TryGetActivePowerup(PowerupType.Magnet, out Powerup magnetPowerup))
-        {
-            magnetPowerup.Expire();
-        }
-        else
-        {
-            DisableMagnet();
-        }
-
-        return true;
-    }
 }
 
 // TO DETERMINE: IS IsActive (and PlayerMagnet.cs - apart from TryBlockHit) even necessary? When magnet activates, we simply

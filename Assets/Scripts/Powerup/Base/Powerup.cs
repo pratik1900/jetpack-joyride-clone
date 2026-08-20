@@ -7,6 +7,8 @@ public enum PowerupType
 {
     Shield,
     Magnet,
+    Life,
+    DoubleScore,
 }
 
 public class Powerup : MonoBehaviour
@@ -30,10 +32,21 @@ public class Powerup : MonoBehaviour
     // Properties (for access)
     // public IEffect Effect => effect;
     public PowerupType Type => type;
+    public Sprite Icon => icon;
 
     private bool _isExpired = false;
     private IEnumerator? _expiryCoroutine;
     private PlayerPowerupController? _powerupController;
+
+    //For UI
+    private float expiryTime;
+
+    // public float RemainingTime => Mathf.Max(0f, expiryTime - Time.time);
+    // public float RemainingTimePercent => timer > 0f ? RemainingTime / timer : 0f;
+    public float RemainingTimePercent =>
+        timer > 0f ? Mathf.Max(0f, expiryTime - Time.time) / timer : 0f;
+
+    public bool HasTimer => timer > 0f;
 
     // Call this when the player picks up the powerup
     public void Activate()
@@ -58,6 +71,9 @@ public class Powerup : MonoBehaviour
         {
             _expiryCoroutine = ExpiryTimer(timer);
             StartCoroutine(_expiryCoroutine);
+
+            //for UI
+            expiryTime = Time.time + timer;
         }
 
         // For Condition-Based Buffs (listenners)
@@ -84,6 +100,9 @@ public class Powerup : MonoBehaviour
         StopCoroutine(_expiryCoroutine);
         _expiryCoroutine = ExpiryTimer(timer);
         StartCoroutine(_expiryCoroutine);
+
+        //for UI
+        expiryTime = Time.time + timer;
     }
 
     public void Expire()

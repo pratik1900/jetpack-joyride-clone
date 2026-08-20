@@ -21,11 +21,8 @@ public class SpawnManager : MonoBehaviour
         {
             _handlers[handler.ObjectTag.ToString()] = handler;
         }
-        StartCoroutine(SpawnCoroutine());
+        // StartCoroutine(SpawnCoroutine());
     }
-
-    // Update is called once per frame
-    void Update() { }
 
     IEnumerator SpawnCoroutine()
     {

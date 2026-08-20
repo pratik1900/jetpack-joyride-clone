@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c226eb0f981ab84584717ef6dc5ac63, type: 3}
+  m_Name: DenseRewardLane
+  m_EditorClassIdentifier: Assembly-CSharp::ScenarioDefinition
+  scenarioName: Dense Reward Lane
+  minDifficulty: 0
+  maxDifficulty: 10
+  weight: 1
+  duration: 3.6
+  steps:
+  - objectTag: 1
+    offset: {x: 0, y: 0.8}
+    spawnOptions:
+      useCustomRotation: 0
+      rotationZ: 0
+  - objectTag: 1
+    offset: {x: 2, y: 0.8}
+    spawnOptions:
+      useCustomRotation: 0
+      rotationZ: 0
+  - objectTag: 0
+    offset: {x: 4.2, y: 1.1}
+    spawnOptions:
+      useCustomRotation: 1
+      rotationZ: 0
+  - objectTag: 1
+    offset: {x: 6, y: -0.6}
+    spawnOptions:
+      useCustomRotation: 0
+      rotationZ: 0
