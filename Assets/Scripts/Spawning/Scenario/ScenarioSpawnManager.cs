@@ -19,6 +19,9 @@ public class ScenarioSpawnManager : MonoBehaviour
 
     private Dictionary<ObjectTags, SpawnHandler> handlers;
 
+    [SerializeField]
+    private DistanceTracker distanceTracker;
+
     private void Start()
     {
         BuildHandlerLookup();
@@ -50,8 +53,16 @@ public class ScenarioSpawnManager : MonoBehaviour
 
             SpawnScenario(scenario);
 
-            yield return new WaitForSeconds(scenario.duration);
+            // yield return new WaitForSeconds(scenario.duration);
+            yield return WaitForDistance(scenario.distanceInterval);
         }
+    }
+
+    private IEnumerator WaitForDistance(float distanceInterval)
+    {
+        float startDistance = distanceTracker.MetersTraveled;
+        while (distanceTracker.MetersTraveled - startDistance < distanceInterval)
+            yield return null;
     }
 
     private void SpawnScenario(ScenarioDefinition scenario)

@@ -10,7 +10,8 @@ public class ScenarioDefinition : ScriptableObject
     public int maxDifficulty = 10;
     public float weight = 1f;
 
-    public float duration = 3f;
+    // public float duration = 3f;
+    public float distanceInterval = 20f;
 
     public List<ScenarioSpawnStep> steps = new List<ScenarioSpawnStep>();
 }

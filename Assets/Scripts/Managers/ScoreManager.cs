@@ -15,6 +15,9 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     private TMP_Text highScoreTextValue;
 
+    [SerializeField]
+    private DistanceTracker distanceTracker;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
