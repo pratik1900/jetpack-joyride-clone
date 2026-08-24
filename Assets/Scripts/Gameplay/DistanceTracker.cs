@@ -6,6 +6,6 @@ public class DistanceTracker : MonoBehaviour
 
     void Update()
     {
-        MetersTraveled += GameManager.Instance.CurrentGameSpeed * Time.deltaTime;
+        MetersTraveled += DifficultyManager.Instance.CurrentGameSpeed * Time.deltaTime;
     }
 }

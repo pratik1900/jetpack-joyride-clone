@@ -6,7 +6,7 @@ public class ScrollLeft : MonoBehaviour
     {
         // IF NOT GAME OVER
         transform.Translate(
-            Vector3.left * Time.deltaTime * GameManager.Instance.CurrentGameSpeed,
+            Vector3.left * Time.deltaTime * DifficultyManager.Instance.CurrentGameSpeed,
             Space.World
         );
     }

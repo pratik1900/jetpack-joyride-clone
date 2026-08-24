@@ -11,8 +11,8 @@ public class ScenarioSpawnManager : MonoBehaviour
     [SerializeField]
     private float spawnOriginY = 0f;
 
-    [SerializeField]
-    private int currentDifficulty = 0;
+    // [SerializeField]
+    // private int currentDifficulty = 0;
 
     [SerializeField]
     private List<ScenarioDefinition> scenarios = new List<ScenarioDefinition>();
@@ -85,6 +85,8 @@ public class ScenarioSpawnManager : MonoBehaviour
 
     private ScenarioDefinition PickScenario()
     {
+        int currentDifficulty = DifficultyManager.Instance.CurrentScenarioDifficultyLevel;
+
         List<ScenarioDefinition> validScenarios = new List<ScenarioDefinition>();
 
         foreach (ScenarioDefinition scenario in scenarios)
