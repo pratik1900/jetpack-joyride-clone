@@ -60,7 +60,7 @@ public class Coin : MonoBehaviour, IPooledObject
     private void CollectCoin()
     {
         AudioManager.Instance.PlaySFX(AudioManager.Instance.coinSFX);
-        ScoreManager.Instance.IncrementScore();
+        ScoreManager.Instance.IncrementScore(5);
         ReturnToPool();
     }
 

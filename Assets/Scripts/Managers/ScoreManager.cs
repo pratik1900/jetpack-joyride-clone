@@ -7,6 +7,7 @@ public class ScoreManager : MonoBehaviour
     public int score { get; private set; }
     public int highScore { get; private set; }
 
+    // For powerups
     private int scoreMultiplier = 1;
 
     [SerializeField]
@@ -14,6 +15,18 @@ public class ScoreManager : MonoBehaviour
 
     [SerializeField]
     private TMP_Text highScoreTextValue;
+
+    [SerializeField]
+    private DistanceTracker distanceTracker;
+
+    [Header("Passive Score")]
+    [SerializeField]
+    private float passiveScorePerSecond = 1f;
+
+    [SerializeField]
+    private AnimationCurve passiveMultiplierCurve = AnimationCurve.Linear(0, 1f, 1, 3f);
+
+    private float passiveScoreAccumulator = 0f;
 
     private void Awake()
     {
@@ -29,6 +42,13 @@ public class ScoreManager : MonoBehaviour
         HighScoreInitialLoad();
     }
 
+    private void Update()
+    {
+        if (GameManager.Instance.isGameOver)
+            return;
+        AccumulatePassiveScore(Time.deltaTime);
+    }
+
     void OnEnable()
     {
         GameEvents.OnGameOver += SaveHighScore;
@@ -41,9 +61,9 @@ public class ScoreManager : MonoBehaviour
         GameEvents.OnUpdateScoreMultiplier -= UpdateScoreMultiplier;
     }
 
-    public void IncrementScore()
+    public void IncrementScore(int val)
     {
-        score = score + (1 * scoreMultiplier);
+        score = score + (val * scoreMultiplier);
 
         if (score >= highScore)
         {
@@ -67,6 +87,21 @@ public class ScoreManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("HighScore", highScore);
         PlayerPrefs.Save();
+    }
+
+    private void AccumulatePassiveScore(float deltaTime)
+    {
+        float passiveMultiplier = passiveMultiplierCurve.Evaluate(
+            DifficultyManager.Instance.NormalizedDifficulty
+        );
+        passiveScoreAccumulator += passiveScorePerSecond * deltaTime * passiveMultiplier;
+
+        int wholePoints = Mathf.FloorToInt(passiveScoreAccumulator);
+        if (wholePoints > 0)
+        {
+            passiveScoreAccumulator -= wholePoints;
+            IncrementScore(wholePoints);
+        }
     }
 
     public void ResetScore()

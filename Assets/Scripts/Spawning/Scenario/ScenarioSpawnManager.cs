@@ -11,13 +11,16 @@ public class ScenarioSpawnManager : MonoBehaviour
     [SerializeField]
     private float spawnOriginY = 0f;
 
-    [SerializeField]
-    private int currentDifficulty = 0;
+    // [SerializeField]
+    // private int currentDifficulty = 0;
 
     [SerializeField]
     private List<ScenarioDefinition> scenarios = new List<ScenarioDefinition>();
 
     private Dictionary<ObjectTags, SpawnHandler> handlers;
+
+    [SerializeField]
+    private DistanceTracker distanceTracker;
 
     private void Start()
     {
@@ -50,8 +53,16 @@ public class ScenarioSpawnManager : MonoBehaviour
 
             SpawnScenario(scenario);
 
-            yield return new WaitForSeconds(scenario.duration);
+            // yield return new WaitForSeconds(scenario.duration);
+            yield return WaitForDistance(scenario.distanceInterval);
         }
+    }
+
+    private IEnumerator WaitForDistance(float distanceInterval)
+    {
+        float startDistance = distanceTracker.MetersTraveled;
+        while (distanceTracker.MetersTraveled - startDistance < distanceInterval)
+            yield return null;
     }
 
     private void SpawnScenario(ScenarioDefinition scenario)
@@ -74,6 +85,8 @@ public class ScenarioSpawnManager : MonoBehaviour
 
     private ScenarioDefinition PickScenario()
     {
+        int currentDifficulty = DifficultyManager.Instance.CurrentScenarioDifficultyLevel;
+
         List<ScenarioDefinition> validScenarios = new List<ScenarioDefinition>();
 
         foreach (ScenarioDefinition scenario in scenarios)
