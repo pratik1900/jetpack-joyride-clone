@@ -50,7 +50,6 @@ public class PlayerAoeSkill : MonoBehaviour
 
     private float _baseSpriteRadius;
 
-    // Reused buffer so the overlap query doesn't allocate garbage every cast
     private Collider2D[] _hitsBuffer = new Collider2D[32];
 
     void Start()
@@ -83,17 +82,9 @@ public class PlayerAoeSkill : MonoBehaviour
         {
             if (_currentRadius < maxRadius)
             {
-                Debug.Log("AOE Skill growing");
                 _currentRadius = Mathf.Min(_currentRadius + growSpeed * Time.deltaTime, maxRadius);
                 SetIndicatorRadius(_currentRadius);
             }
-            else
-            {
-                Debug.Log("AOE Skill reached max radius");
-            }
-            // Debug.Log("AOE Skill growing");
-            // _currentRadius = Mathf.Min(_currentRadius + growSpeed * Time.deltaTime, maxRadius);
-            // SetIndicatorRadius(_currentRadius);
         }
 
         if (_skillActive && AOESkillAction.action.WasReleasedThisFrame())
@@ -129,10 +120,9 @@ public class PlayerAoeSkill : MonoBehaviour
         Debug.Log($"AOE Skill hit {_hitsBuffer.Length} objects");
         foreach (Collider2D hit in _hitsBuffer)
         {
-            // if (_hitsBuffer[i].TryGetComponent<IExplodable>(out var explodable))
             if (hit.gameObject.TryGetComponent<IPooledObject>(out var explodable))
             {
-                // explodable.Explode();
+                //Explosion logic - needs effects
                 explodable.ReturnToPool();
             }
         }

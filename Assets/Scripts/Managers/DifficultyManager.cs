@@ -10,8 +10,6 @@ public class DifficultyManager : MonoBehaviour
     private float timeToMaxDifficulty = 300f;
 
     [Header("Speed Ramp")]
-    private float currentGameSpeed;
-
     [SerializeField]
     private float baseGameSpeed = 5f;
 
@@ -44,7 +42,7 @@ public class DifficultyManager : MonoBehaviour
 
     private void Start()
     {
-        currentGameSpeed = baseGameSpeed;
+        SetGameSpeed(baseGameSpeed);
     }
 
     private void Update()
@@ -67,7 +65,7 @@ public class DifficultyManager : MonoBehaviour
 
     public void SetGameSpeed(float newSpeed)
     {
-        currentGameSpeed = newSpeed;
+        CurrentGameSpeed = newSpeed;
     }
 
     // needs to be used somewhere
