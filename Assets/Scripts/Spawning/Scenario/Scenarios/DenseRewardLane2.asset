@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c226eb0f981ab84584717ef6dc5ac63, type: 3}
-  m_Name: DenseRewardLane
+  m_Name: DenseRewardLane2
   m_EditorClassIdentifier: Assembly-CSharp::ScenarioDefinition
   scenarioName: Dense Reward Lane
   minDifficulty: 0
   maxDifficulty: 10
   weight: 1
-  duration: 3.6
+  distanceInterval: 16
   steps:
   - objectTag: 1
     offset: {x: 0, y: 0.8}
@@ -24,17 +24,17 @@ MonoBehaviour:
       useCustomRotation: 0
       rotationZ: 0
   - objectTag: 1
-    offset: {x: 2, y: 0.8}
+    offset: {x: 4, y: 0.8}
     spawnOptions:
       useCustomRotation: 0
       rotationZ: 0
   - objectTag: 0
-    offset: {x: 4.2, y: 1.1}
+    offset: {x: 8, y: -0.6}
     spawnOptions:
       useCustomRotation: 1
       rotationZ: 0
   - objectTag: 1
-    offset: {x: 6, y: -0.6}
+    offset: {x: 12, y: 1.1}
     spawnOptions:
       useCustomRotation: 0
       rotationZ: 0

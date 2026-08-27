@@ -16,7 +16,7 @@ MonoBehaviour:
   minDifficulty: 0
   maxDifficulty: 10
   weight: 1
-  duration: 3
+  distanceInterval: 15
   steps:
   - objectTag: 0
     offset: {x: -4, y: -1.75}

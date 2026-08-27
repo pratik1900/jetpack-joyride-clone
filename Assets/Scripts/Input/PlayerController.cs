@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float thrustSpeed = 5f;
 
-    // [SerializeField] private float fallSpeed = 8f;
+    float maxSpeed = 10f;
 
     // Upper bound of the playable area
     private float roofY = 4.2f;
@@ -36,6 +36,22 @@ public class PlayerController : MonoBehaviour
 
     private bool isInvincible = false;
 
+    // ****************************************
+    [Header("Gravity Feel")]
+    [SerializeField]
+    private float baseGravityScale = 1f;
+
+    [SerializeField]
+    private float fallGravityMultiplier = 2.2f;
+
+    [SerializeField]
+    private float maxFallSpeed = -14f;
+
+    [SerializeField]
+    private float maxRiseSpeed = 8f;
+
+    // ****************************************
+
     void Awake()
     {
         playerControls = new PlayerControls();
@@ -49,20 +65,68 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Update()
+    // void FixedUpdate()
+    // {
+    //     if (thrustAction.IsPressed())
+    //     {
+    //         playerRb.AddForce(Vector2.up * thrustSpeed, ForceMode2D.Force);
+    //     }
+
+    //     // Clamp velocity instead of accelerating forever (optional but common)
+    //     playerRb.linearVelocity = new Vector2(
+    //         playerRb.linearVelocity.x,
+    //         Mathf.Clamp(playerRb.linearVelocity.y, -maxSpeed, maxSpeed)
+    //     );
+
+    //     // Clamp position using the Rigidbody, not transform directly
+    //     float clampedY = Mathf.Clamp(playerRb.position.y, groundY, roofY);
+    //     if (!Mathf.Approximately(clampedY, playerRb.position.y))
+    //     {
+    //         playerRb.position = new Vector2(playerRb.position.x, clampedY);
+
+    //         // Kill velocity in whichever direction we just clamped
+    //         if (playerRb.position.y >= roofY && playerRb.linearVelocity.y > 0)
+    //             playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, 0);
+    //         if (playerRb.position.y <= groundY && playerRb.linearVelocity.y < 0)
+    //             playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, 0);
+    //     }
+    // }
+
+    void FixedUpdate()
     {
         if (thrustAction.IsPressed())
         {
             playerRb.AddForce(Vector2.up * thrustSpeed, ForceMode2D.Force);
+            playerRb.gravityScale = baseGravityScale;
+        }
+        else if (playerRb.linearVelocity.y < 0)
+        {
+            // Falling and not thrusting — apply extra gravity
+            playerRb.gravityScale = baseGravityScale * fallGravityMultiplier;
+        }
+        else
+        {
+            playerRb.gravityScale = baseGravityScale;
         }
 
-        // Clamp vertical position to playable area bounds
-        float clampedY = Mathf.Clamp(transform.position.y, groundY, roofY);
-        transform.position = new Vector3(transform.position.x, clampedY, transform.position.z);
+        // Asymmetric clamp instead of a single maxSpeed
+        playerRb.linearVelocity = new Vector2(
+            playerRb.linearVelocity.x,
+            Mathf.Clamp(playerRb.linearVelocity.y, maxFallSpeed, maxRiseSpeed)
+        );
 
-        // Kill upward velocity if at roof
-        if (transform.position.y >= roofY && playerRb.linearVelocity.y > 0)
-            playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, 0);
+        // Clamp position using the Rigidbody, not transform directly
+        float clampedY = Mathf.Clamp(playerRb.position.y, groundY, roofY);
+        if (!Mathf.Approximately(clampedY, playerRb.position.y))
+        {
+            playerRb.position = new Vector2(playerRb.position.x, clampedY);
+
+            // Kill velocity in whichever direction we just clamped
+            if (playerRb.position.y >= roofY && playerRb.linearVelocity.y > 0)
+                playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, 0);
+            if (playerRb.position.y <= groundY && playerRb.linearVelocity.y < 0)
+                playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, 0);
+        }
     }
 
     private void OnEnable()

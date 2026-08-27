@@ -167,7 +167,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.15, y: 4.5, z: 1}
+  m_LocalScale: {x: 0.15, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1512575652572441765}
@@ -187,7 +187,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 214655a3ba834b54f958217045a04315, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScrollLeft
-  scrollSpeed: 10
 --- !u!114 &-5354138461397598155
 MonoBehaviour:
   m_ObjectHideFlags: 0

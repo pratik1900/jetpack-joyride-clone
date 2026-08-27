@@ -25,8 +25,7 @@ public class CoinSpawnHandler : SpawnHandler
     {
         new CoinGridFormation("2x3", 2, 3, 1.0f),
         new CoinGridFormation("2x4", 2, 4, 1.0f),
-        new CoinGridFormation("3x3", 3, 3, 1.0f),
-        new CoinGridFormation("3x4", 3, 4, 1.0f),
+        new CoinGridFormation("2x5", 2, 5, 1.0f),
     };
 
     public override ObjectTags ObjectTag => ObjectTags.Coin;

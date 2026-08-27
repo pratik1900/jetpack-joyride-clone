@@ -871,7 +871,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 1
+  m_LinearDamping: 0
   m_AngularDamping: 0.07
   m_GravityScale: 1.6
   m_Material: {fileID: 0}
@@ -898,14 +898,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   powerupController: {fileID: 0}
-  thrustSpeed: 65
+  thrustSpeed: 50
   spriteRenderer: {fileID: 467345722}
   flashCount: 6
   flashDuration: 0.08
-  baseGravityScale: 1.6
-  fallGravityMultiplier: 2.2
-  maxFallSpeed: -14
-  maxRiseSpeed: 8
 --- !u!114 &467345727
 MonoBehaviour:
   m_ObjectHideFlags: 0

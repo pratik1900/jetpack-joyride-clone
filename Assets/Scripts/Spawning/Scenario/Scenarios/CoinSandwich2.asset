@@ -16,7 +16,7 @@ MonoBehaviour:
   minDifficulty: 0
   maxDifficulty: 10
   weight: 1
-  duration: 3
+  distanceInterval: 16
   steps:
   - objectTag: 1
     offset: {x: 0, y: -1}
@@ -24,12 +24,12 @@ MonoBehaviour:
       useCustomRotation: 0
       rotationZ: 0
   - objectTag: 0
-    offset: {x: 4, y: 0}
+    offset: {x: 6, y: 0}
     spawnOptions:
       useCustomRotation: 1
       rotationZ: 0
   - objectTag: 1
-    offset: {x: 8, y: 1}
+    offset: {x: 12, y: 1}
     spawnOptions:
       useCustomRotation: 0
       rotationZ: 0

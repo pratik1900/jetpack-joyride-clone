@@ -69,6 +69,8 @@ public class ScenarioSpawnManager : MonoBehaviour
     {
         Vector3 origin = new Vector3(spawnOriginX, spawnOriginY, 0f);
 
+        ScenarioBoundsGizmo.Attach(scenario, origin, handlers); // TEMP DEBUG — delete when balancing is done
+
         foreach (ScenarioSpawnStep step in scenario.steps)
         {
             if (!handlers.TryGetValue(step.objectTag, out SpawnHandler handler))
